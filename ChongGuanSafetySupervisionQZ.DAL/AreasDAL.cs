@@ -17,7 +17,7 @@ namespace ChongGuanSafetySupervisionQZ.DAL
                         select a;
 
 
-            return query;
+            return query.ToList();
         }
 
         public async Task<QZ_Areas> Add(QZ_Areas areas)

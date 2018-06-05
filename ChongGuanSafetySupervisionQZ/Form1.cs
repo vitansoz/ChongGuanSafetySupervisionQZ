@@ -1,4 +1,5 @@
 ﻿using ChongGuanSafetySupervisionQZ.Model;
+using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,7 +43,7 @@ namespace ChongGuanSafetySupervisionQZ
 
             ChongGuanSafetySupervisionQZ.DAL.AreasDAL areasDAL = new DAL.AreasDAL();
 
-            QZ_Areas qZ_Areas = new QZ_Areas { AreaId = DateTime.Now.Ticks.ToString(), AreaLevel = 1, AreaName = "fuck", AreaPid = "1" };
+            QZ_Areas qZ_Areas = new QZ_Areas { AreaId = "1", AreaLevel = 1, AreaName = "fuck", AreaPid = "1" };
             var t = await areasDAL.Add(qZ_Areas);
 
 
@@ -63,17 +64,36 @@ namespace ChongGuanSafetySupervisionQZ
             gridControl1.RefreshDataSource();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             ChongGuanSafetySupervisionQZ.DAL.UserDAL userDAL = new DAL.UserDAL();
 
-            if (!userDAL.Login(new QZ_User { LoginName = "mayun", LoginPwd = "dashabi" }))
+            ResultData<QZ_User> result = await userDAL.Add(new QZ_User
             {
-                DevExpress.XtraEditors.XtraMessageBox.Show("傻逼", "登陆失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AreaCode = "shit",
+                IsDeleteId = 0,
+                LoginName = "张晓坤" + DateTime.Now.Ticks,
+                IsForbidden = 0,
+                LoginPwd = "123456",
+                UserAge = "18",
+                UserCard = "123",
+                UserCode = "sb123",
+                UserEmail = "sb@126.com",
+                UserFingerImageFilePath = "sb",
+                UserLawCard = "sb",
+                UserName = "张晓坤",
+                UserPhone = "1334324",
+                UserSex = "sy",
+                UserPhotoFilePath = "sss"
+            });
+
+            if(result.IsSuccessed)
+            {
+                XtraMessageBox.Show(result.Data.UserName, result.Data.UserId.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
-                DevExpress.XtraEditors.XtraMessageBox.Show("马云", "就是大傻逼！！！！", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("sb", result.Message, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
             }
         }

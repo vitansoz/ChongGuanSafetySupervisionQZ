@@ -8,9 +8,11 @@ namespace ChongGuanSafetySupervisionQZ.Model
 
     public partial class QZ_Role
     {
+        //[Key]
+        //[StringLength(32)]
         [Key]
-        [StringLength(32)]
-        public string RoleId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long RoleId { get; set; }
 
         [Required]
         [StringLength(32)]

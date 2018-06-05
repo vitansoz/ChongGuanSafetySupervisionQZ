@@ -8,9 +8,11 @@ namespace ChongGuanSafetySupervisionQZ.Model
 
     public partial class QZ_Deparment
     {
+        //[Key]
+        //[StringLength(32)]
         [Key]
-        [StringLength(32)]
-        public string DeparmentId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long DeparmentId { get; set; }
 
         [Required]
         [StringLength(32)]

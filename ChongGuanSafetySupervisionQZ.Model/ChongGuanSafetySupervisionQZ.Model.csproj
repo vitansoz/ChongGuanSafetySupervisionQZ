@@ -73,6 +73,7 @@
     <Compile Include="QZ_Role.cs" />
     <Compile Include="QZ_Role_User.cs" />
     <Compile Include="QZ_User.cs" />
+    <Compile Include="ResultData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

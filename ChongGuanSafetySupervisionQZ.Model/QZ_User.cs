@@ -9,8 +9,8 @@ namespace ChongGuanSafetySupervisionQZ.Model
     public partial class QZ_User
     {
         [Key]
-        [StringLength(32)]
-        public string UserId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long UserId { get; set; }
 
         [Required]
         [StringLength(32)]

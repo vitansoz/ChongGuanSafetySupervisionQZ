@@ -61,10 +61,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AreasDAL.cs" />
+    <Compile Include="DeparmentDAL.cs" />
+    <Compile Include="Deparment_UserDAL.cs" />
+    <Compile Include="EventDAL.cs" />
+    <Compile Include="InquiryDAL.cs" />
+    <Compile Include="PartyDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role_UserDAL.cs" />
     <Compile Include="UserDAL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ChongGuanDotNetUtils\ChongGuanDotNetUtils.csproj">
+      <Project>{820c0b35-4c65-4ecc-8729-0832f6acd0e4}</Project>
+      <Name>ChongGuanDotNetUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ChongGuanSafetySupervisionQZ.Model\ChongGuanSafetySupervisionQZ.Model.csproj">
       <Project>{0998ec03-adba-47e1-8bb3-cac7591bfc78}</Project>
       <Name>ChongGuanSafetySupervisionQZ.Model</Name>

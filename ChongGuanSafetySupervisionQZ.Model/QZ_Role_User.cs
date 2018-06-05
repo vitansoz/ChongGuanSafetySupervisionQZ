@@ -8,16 +8,13 @@ namespace ChongGuanSafetySupervisionQZ.Model
 
     public partial class QZ_Role_User
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; set; }
 
-        [Required]
-        [StringLength(32)]
-        public string RoleId { get; set; }
+        public long RoleId { get; set; }
 
-        [Required]
-        [StringLength(32)]
-        public string UserId { get; set; }
+        public long UserId { get; set; }
 
         public int IsDeleteId { get; set; }
 
