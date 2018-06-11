@@ -53,7 +53,7 @@ namespace ChongGuanSafetySupervisionQZ.DAL
                         where e.InquiryId == qZ_Inquiry.InquiryId
                         select e;
 
-            InquiryId data = query.FirstOrDefault();
+            QZ_Inquiry data = query.FirstOrDefault();
 
             if (data != null)
             {

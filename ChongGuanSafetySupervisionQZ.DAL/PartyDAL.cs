@@ -55,7 +55,7 @@ namespace ChongGuanSafetySupervisionQZ.DAL
 
             if (data != null)
             {
-                ReflectionHelper.CopyProperties<QZ_Event>(qZ_Event, data, new String[] { "PartyId" });
+                ReflectionHelper.CopyProperties<QZ_Party>(qZ_Party, data, new String[] { "PartyId" });
 
                 data.ModifyTime = DateTime.Now.ToString();
                 data.IsDeleteId = 1;
@@ -83,7 +83,7 @@ namespace ChongGuanSafetySupervisionQZ.DAL
 
             if (data != null)
             {
-                ReflectionHelper.CopyProperties<QZ_Event>(qZ_Party, data, new String[] { "PartyId" });
+                ReflectionHelper.CopyProperties<QZ_Party>(qZ_Party, data, new String[] { "PartyId" });
 
                 data.ModifyTime = DateTime.Now.ToString();
 

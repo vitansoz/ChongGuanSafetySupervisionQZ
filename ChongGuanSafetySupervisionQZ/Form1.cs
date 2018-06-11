@@ -1,5 +1,6 @@
 ﻿using ChongGuanSafetySupervisionQZ.Model;
 using DevExpress.XtraEditors;
+using DevExpress.XtraTreeList.Nodes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,8 +40,6 @@ namespace ChongGuanSafetySupervisionQZ
 
         private async void simpleButton1_Click(object sender, EventArgs e)
         {
-
-
             ChongGuanSafetySupervisionQZ.DAL.AreasDAL areasDAL = new DAL.AreasDAL();
 
             QZ_Areas qZ_Areas = new QZ_Areas { AreaId = "1", AreaLevel = 1, AreaName = "fuck", AreaPid = "1" };
@@ -58,7 +57,7 @@ namespace ChongGuanSafetySupervisionQZ
         {
             ChongGuanSafetySupervisionQZ.DAL.AreasDAL areasDAL = new DAL.AreasDAL();
             var t = areasDAL.Query(DateTime.Now.Second % 2);
-            BindingList<QZ_Areas> tt = new BindingList<QZ_Areas>(t.ToList());
+            BindingList<QZ_Areas> tt = new BindingList<QZ_Areas>(t.Data.ToList());
 
             gridControl1.DataSource = tt;
             gridControl1.RefreshDataSource();
@@ -95,6 +94,51 @@ namespace ChongGuanSafetySupervisionQZ
             {
                 XtraMessageBox.Show("sb", result.Message, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ChongGuanSafetySupervisionQZ.DAL.AreasDAL areasDAL = new DAL.AreasDAL();
+            var areaList = areasDAL.Query();
+
+            BindingList<QZ_Areas> tt = new BindingList<QZ_Areas>(areaList.Data.ToList());
+
+            //this.treeListLookUpEdit1.
+
+            //this.treeListLookUpEdit1.DataBindings.Clear();
+            this.treeListLookUpEdit1.Properties.DataSource = tt;
+            this.treeListLookUpEdit1.Properties.TreeList.KeyFieldName = "AreaId";
+            this.treeListLookUpEdit1.Properties.TreeList.ParentFieldName = "AreaPid";
+            this.treeListLookUpEdit1.Properties.DisplayMember = "AreaName";
+            this.treeListLookUpEdit1.Properties.ValueMember = "AreaId";
+            this.treeListLookUpEdit1.EditValue = tt[0].AreaId;
+
+            this.treeListLookUpEdit1.Properties.TreeList.Columns[0].Caption = "部门所在地";
+            this.treeListLookUpEdit1.Properties.TreeList.Columns[1].Visible= false;
+
+        }
+
+        private void treeListLookUpEdit1_EditValueChanged(object sender, EventArgs e)
+        {
+            this.label1.Text = this.treeListLookUpEdit1.EditValue.ToString();
+        }
+
+        private void treeListLookUpEdit1_Popup(object sender, EventArgs e)
+        {
+            foreach (TreeListNode node in this.treeListLookUpEdit1TreeList.Nodes)
+            {
+                node.Expanded = false;
+                this.SetStyle(node);
+            }
+        }
+
+        public void SetStyle(TreeListNode node)
+        {
+            for (int index = 0; index < node.Nodes.Count; ++index)
+            {
+                node.Nodes[index].Expanded = false;
+                this.SetStyle(node.Nodes[index]);
             }
         }
     }
