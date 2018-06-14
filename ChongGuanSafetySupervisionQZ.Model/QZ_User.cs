@@ -12,7 +12,6 @@ namespace ChongGuanSafetySupervisionQZ.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long UserId { get; set; }
 
-        [Required]
         [StringLength(32)]
         public string UserCode { get; set; }
 
@@ -25,44 +24,38 @@ namespace ChongGuanSafetySupervisionQZ.Model
         public string LoginName { get; set; }
 
         [Required]
-        [StringLength(32)]
+        [StringLength(128)]
         public string LoginPwd { get; set; }
 
-        [Required]
+        [StringLength(128)]
+        public string PwdSalt { get; set; }
+
         [StringLength(32)]
         public string UserLawCard { get; set; }
 
-        [Required]
         [StringLength(32)]
         public string AreaCode { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string UserCard { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string UserPhone { get; set; }
 
-        [Required]
         [StringLength(4)]
         public string UserSex { get; set; }
 
-        [Required]
         [StringLength(4)]
         public string UserAge { get; set; }
 
         public int IsForbidden { get; set; }
 
-        [Required]
         [StringLength(128)]
         public string UserPhotoFilePath { get; set; }
 
-        [Required]
         [StringLength(128)]
         public string UserFingerImageFilePath { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string UserEmail { get; set; }
 

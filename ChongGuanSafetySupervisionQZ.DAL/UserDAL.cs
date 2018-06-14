@@ -16,7 +16,7 @@ namespace ChongGuanSafetySupervisionQZ.DAL
             string message = "登录失败，请检查用户名密码是否正确";
 
             var query = from u in ModelQZ.DatabaseContext.QZ_User
-                        where (u.LoginName == qZ_User.LoginName && u.LoginPwd == qZ_User.LoginPwd && u.IsDeleteId != 1 && u.IsForbidden != 1)
+                        where (u.LoginName == qZ_User.LoginName && u.LoginPwd == (u.PwdSalt + qZ_User.LoginPwd).Md5() && u.IsDeleteId != 1 && u.IsForbidden != 1)
                         select u;
 
             ResultData<QZ_User> result = new ResultData<QZ_User> { IsSuccessed = query.Count() == 1, Message = message };
@@ -25,6 +25,7 @@ namespace ChongGuanSafetySupervisionQZ.DAL
             {
                 message = "success";
                 result.Data = query.FirstOrDefault();
+                result.Data.PwdSalt = "";
             }
 
             return result;
@@ -35,7 +36,7 @@ namespace ChongGuanSafetySupervisionQZ.DAL
             string message = "密码修改失败，不存在的用户！";
 
             var query = from u in ModelQZ.DatabaseContext.QZ_User
-                        where (u.LoginName == qZ_User.LoginName && u.LoginPwd == oldPassword.Md5())
+                        where (u.LoginName == qZ_User.LoginName && u.LoginPwd == (oldPassword + u.PwdSalt).Md5())
                         select u;
 
             var data = query.FirstOrDefault();
@@ -44,7 +45,9 @@ namespace ChongGuanSafetySupervisionQZ.DAL
                 ReflectionHelper.CopyProperties<QZ_User>(qZ_User, data, new String[] { "UserId", "LoginPwd" });
 
                 data.ModifyTime = DateTime.Now.ToString();
-                data.LoginPwd = newPassword.Md5();
+
+                data.PwdSalt = Guid.NewGuid().ToString("N");
+                data.LoginPwd = (newPassword + data.PwdSalt).Md5();
                 ModelQZ.DatabaseContext.Entry(data).State = System.Data.Entity.EntityState.Modified;
                 await ModelQZ.DatabaseContext.SaveChangesAsync();
 
@@ -92,21 +95,33 @@ namespace ChongGuanSafetySupervisionQZ.DAL
 
             QZ_User data = query.FirstOrDefault();
 
+            bool isSuccessed = false;
             if (data == null)
             {
-                qZ_User.LoginPwd = qZ_User.LoginPwd.Md5();
+                qZ_User.PwdSalt = Guid.NewGuid().ToString("N");
+                qZ_User.LoginPwd = (qZ_User.LoginPwd + qZ_User.PwdSalt).Md5();
+
 
                 qZ_User.CreateTime = DateTime.Now.ToString();
                 qZ_User.ModifyTime = DateTime.Now.ToString();
                 //ModelQZ.DatabaseContext.Entry(qZ_User).State = System.Data.Entity.EntityState.Added;
 
-                data = ModelQZ.DatabaseContext.QZ_User.Add(qZ_User);
-                await ModelQZ.DatabaseContext.SaveChangesAsync();
+                try
+                {
+                    data = ModelQZ.DatabaseContext.QZ_User.Add(qZ_User);
+                    await ModelQZ.DatabaseContext.SaveChangesAsync();
+                    message = string.Empty;
 
-                message = string.Empty;
+                    isSuccessed = true;
+                }
+                catch (Exception ex)
+                {
+                    isSuccessed = false;
+                    message = ex.Message;
+                }
             }
 
-            ResultData<QZ_User> result = new ResultData<QZ_User> { IsSuccessed = data == null, Message = message, Data = data };
+            ResultData<QZ_User> result = new ResultData<QZ_User> { IsSuccessed = isSuccessed, Message = message, Data = data };
 
             return result;
         }

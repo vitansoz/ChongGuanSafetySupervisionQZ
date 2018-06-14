@@ -36,39 +36,30 @@ namespace ChongGuanSafetySupervisionQZ.Model
         [StringLength(128)]
         public string Users { get; set; }
 
-        [Required]
         [StringLength(128)]
         public string InquiryChatFilePath { get; set; }
 
-        [Required]
         [StringLength(128)]
         public string InquiryAudioFilePath { get; set; }
 
-        [Required]
         [StringLength(128)]
         public string InquiryVideo1FilePath { get; set; }
 
-        [Required]
         [StringLength(128)]
         public string InquiryVideo2FilePath { get; set; }
 
-        [Required]
         [StringLength(128)]
         public string InquiryVideo3FilePath { get; set; }
 
-        [Required]
         [StringLength(128)]
         public string InquiryVideo4FilePath { get; set; }
 
-        [Required]
         [StringLength(128)]
         public string InquiryLawBookFilePath { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string InquiryBeginTime { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string InquiryEndTime { get; set; }
 

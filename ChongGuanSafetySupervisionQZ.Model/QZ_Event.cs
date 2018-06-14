@@ -20,17 +20,14 @@ namespace ChongGuanSafetySupervisionQZ.Model
         [StringLength(128)]
         public string EventName { get; set; }
 
-        [Required]
         [StringLength(128)]
         public string EventAddress { get; set; }
 
-        [Required]
         [StringLength(500)]
         public string EventDesc { get; set; }
 
         public int EventStatus { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string EventTime { get; set; }
 

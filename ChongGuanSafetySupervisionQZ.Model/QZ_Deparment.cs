@@ -22,7 +22,6 @@ namespace ChongGuanSafetySupervisionQZ.Model
         [StringLength(32)]
         public string DeparmentName { get; set; }
 
-        [Required]
         [StringLength(32)]
         public string DeparmentParentCode { get; set; }
 
