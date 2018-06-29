@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChongGuanSafetySupervisionQ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChongGuanSafetySupervisionQZ.ViewModel", "ChongGuanSafetySupervisionQZ.ViewModel\ChongGuanSafetySupervisionQZ.ViewModel.csproj", "{43F77426-26DE-4E6B-9C4C-AB98FDA2742E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChongGuanSafetySupervisionQZ.Hardware", "ChongGuanSafetySupervisionQZ.Hardware\ChongGuanSafetySupervisionQZ.Hardware.csproj", "{FC88B726-DDD1-42A5-8B4F-FF0A82B99D38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,14 @@ Global
 		{43F77426-26DE-4E6B-9C4C-AB98FDA2742E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{43F77426-26DE-4E6B-9C4C-AB98FDA2742E}.Release|x86.ActiveCfg = Release|Any CPU
 		{43F77426-26DE-4E6B-9C4C-AB98FDA2742E}.Release|x86.Build.0 = Release|Any CPU
+		{FC88B726-DDD1-42A5-8B4F-FF0A82B99D38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC88B726-DDD1-42A5-8B4F-FF0A82B99D38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC88B726-DDD1-42A5-8B4F-FF0A82B99D38}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FC88B726-DDD1-42A5-8B4F-FF0A82B99D38}.Debug|x86.Build.0 = Debug|Any CPU
+		{FC88B726-DDD1-42A5-8B4F-FF0A82B99D38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC88B726-DDD1-42A5-8B4F-FF0A82B99D38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC88B726-DDD1-42A5-8B4F-FF0A82B99D38}.Release|x86.ActiveCfg = Release|Any CPU
+		{FC88B726-DDD1-42A5-8B4F-FF0A82B99D38}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

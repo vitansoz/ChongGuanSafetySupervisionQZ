@@ -7,8 +7,14 @@ namespace ChongGuanSafetySupervisionQZ.Model
 
     public partial class ModelQZ : DbContext
     {
+        private static string ConnectStr()
+        {
+            return $"data source={AppDomain.CurrentDomain.BaseDirectory}database\\QZDatabase.db";
+        }
+
         public ModelQZ()
             : base("name=ModelQZ")
+        //: base(ConnectStr())
         {
             //_modelQZ.Database.Initialize(false);
         }

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckingHardwareViewModel.cs" />
     <Compile Include="ChinaCitiesViewModel.cs" />
     <Compile Include="NotifyPropertyChangedExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -48,6 +49,10 @@
     <ProjectReference Include="..\ChongGuanSafetySupervisionQZ.DAL\ChongGuanSafetySupervisionQZ.DAL.csproj">
       <Project>{b5d7c4a5-f31f-45f4-a6cc-844cf356a1cd}</Project>
       <Name>ChongGuanSafetySupervisionQZ.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChongGuanSafetySupervisionQZ.Hardware\ChongGuanSafetySupervisionQZ.Hardware.csproj">
+      <Project>{fc88b726-ddd1-42a5-8b4f-ff0a82b99d38}</Project>
+      <Name>ChongGuanSafetySupervisionQZ.Hardware</Name>
     </ProjectReference>
     <ProjectReference Include="..\ChongGuanSafetySupervisionQZ.Model\ChongGuanSafetySupervisionQZ.Model.csproj">
       <Project>{0998ec03-adba-47e1-8bb3-cac7591bfc78}</Project>

@@ -5,8 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChongGuanSafetySupervisionQZ.View.WPF"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" 
-        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         TextOptions.TextFormattingMode="Ideal"
@@ -35,7 +33,7 @@
                        Foreground="WhiteSmoke"  FontSize="45" HorizontalAlignment="Center"/>
 
         <GroupBox  Header="Card Group Box" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="180,16,180,60"
-                   Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" >
+                   Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  >
             <GroupBox.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -54,7 +52,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                     <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
                 </Grid.RowDefinitions>
                 <Image Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="3" Margin="15,5,15,20"
                        Source="Resources/Images/police.png" Stretch="UniformToFill" />
@@ -76,17 +74,17 @@
                 <telerik:RadMaskedTextInput Name="RadMaskedTextInput_AdminPasswordConfim" Grid.Column="1" Grid.Row="4" Width="240" Margin="10,0,0,10" BorderBrush="Gray" BorderThickness="1.5" VerticalAlignment="Top"
                     AllowInvalidValues="True" Mask="" Placeholder=" " Visibility="Collapsed"/>-->
 
-                <TextBox Name="TextBox_AdminUserName" Grid.Column="2" Grid.Row="0" Width="240" Margin="10,2,0,0" Padding="2.5,0,0,0" Height="36" BorderBrush="Gray" BorderThickness="1.5" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <telerik:RadPasswordBox Name="RadPasswordBox_AdminPassword" InputScope="Password" Grid.Column="2" Grid.Row="1" Width="240" Margin="10,2,0,0" BorderBrush="Gray" BorderThickness="1.5" VerticalAlignment="Center" HorizontalAlignment="Left"
+                <TextBox Name="TextBox_UserName" Grid.Column="2" Grid.Row="0" Width="240" Margin="10,2,0,0" Padding="2.5,0,0,0" Height="36" BorderBrush="Gray" BorderThickness="1.5" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <telerik:RadPasswordBox Name="RadPasswordBox_Password" InputScope="Password" Grid.Column="2" Grid.Row="1" Width="240" Margin="10,2,0,0" BorderBrush="Gray" BorderThickness="1.5" VerticalAlignment="Center" HorizontalAlignment="Left"
                                 WatermarkContent="输入密码" Password="" />
-               
+
 
                 <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Style="{DynamicResource MaterialDesignRaisedButton}" materialDesign:ShadowAssist.ShadowDepth="Depth2" 
+                    <Button Style="{DynamicResource MaterialDesignRaisedButton}" Name="Button_Confim" materialDesign:ShadowAssist.ShadowDepth="Depth2" 
                             HorizontalAlignment="Right" Margin="0,0,30,0"
                             FontSize="16.667" Width="160" Height="40" Click="Button_Confim_Click">
                         确认
@@ -98,7 +96,13 @@
                         退出
                     </Button>
                 </Grid>
+
+                <!--<ProgressBar Grid.ColumnSpan="3" Grid.RowSpan="3"  Width="20" Height="20" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" />-->
+                <materialDesign:Card UniformCornerRadius="14" Name="ProgressBar_Login" Visibility="Collapsed" Padding="4" Grid.ColumnSpan="3" Grid.RowSpan="3" Height="30" Width="30">
+                    <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" Value="50" IsIndeterminate="True" />
+                </materialDesign:Card>
             </Grid>
+            
         </GroupBox>
 
     </Grid>

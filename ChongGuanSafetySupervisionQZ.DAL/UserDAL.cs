@@ -11,22 +11,32 @@ namespace ChongGuanSafetySupervisionQZ.DAL
 {
     public class UserDAL
     {
-        public ResultData<QZ_User> Login(QZ_User qZ_User)
+        public async Task<ResultData<QZ_User>> Login(QZ_User qZ_User)
         {
+            ResultData<QZ_User> result = new ResultData<QZ_User>();
             string message = "登录失败，请检查用户名密码是否正确";
 
-            var query = from u in ModelQZ.DatabaseContext.QZ_User
-                        where (u.LoginName == qZ_User.LoginName && u.LoginPwd == (u.PwdSalt + qZ_User.LoginPwd).Md5() && u.IsDeleteId != 1 && u.IsForbidden != 1)
-                        select u;
+            await Task.Run(() =>
+             {
+                 var query = from u in ModelQZ.DatabaseContext.QZ_User
+                             where (u.LoginName == qZ_User.LoginName && u.IsDeleteId != 1 && u.IsForbidden != 1)
+                             select u;
 
-            ResultData<QZ_User> result = new ResultData<QZ_User> { IsSuccessed = query.Count() == 1, Message = message };
+                 var data = query.FirstOrDefault();
 
-            if (result.IsSuccessed)
-            {
-                message = "success";
-                result.Data = query.FirstOrDefault();
-                result.Data.PwdSalt = "";
-            }
+                 if (data != null && data.LoginPwd == (qZ_User.LoginPwd + data.PwdSalt).Md5())
+                 {
+                     ReflectionHelper.CopyProperties<QZ_User>(data, qZ_User, new String[] { "LoginPwd", "PwdSalt" });
+
+                     message = "success";
+                     //data.PwdSalt = "";
+                     //data.LoginPwd = "";
+
+                     result.IsSuccessed = true;
+                     result.Data = qZ_User;
+                 }
+             });
+            result.Message = message;
 
             return result;
         }
@@ -36,11 +46,11 @@ namespace ChongGuanSafetySupervisionQZ.DAL
             string message = "密码修改失败，不存在的用户！";
 
             var query = from u in ModelQZ.DatabaseContext.QZ_User
-                        where (u.LoginName == qZ_User.LoginName && u.LoginPwd == (oldPassword + u.PwdSalt).Md5())
+                        where (u.LoginName == qZ_User.LoginName)
                         select u;
 
             var data = query.FirstOrDefault();
-            if (data != null)
+            if (data != null && data.LoginPwd == (oldPassword + data.PwdSalt).Md5())
             {
                 ReflectionHelper.CopyProperties<QZ_User>(qZ_User, data, new String[] { "UserId", "LoginPwd" });
 

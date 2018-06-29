@@ -2,9 +2,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-    StartupUri="LoginWindow.xaml">
+    xmlns:converter="clr-namespace:ChongGuanSafetySupervisionQZ.View.WPF.Converters" >
     <Application.Resources>
         <ResourceDictionary>
+            <converter:BoolVisibilityConverter x:Key="BoolToVisibility" />
             <Style TargetType="{x:Type TextElement }">
                 <Setter Property="FontFamily" Value="微软雅黑"/>
             </Style>
@@ -14,6 +15,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
-      </ResourceDictionary>
+        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

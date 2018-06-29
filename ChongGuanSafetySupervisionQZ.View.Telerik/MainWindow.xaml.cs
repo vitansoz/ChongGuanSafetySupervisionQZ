@@ -1,8 +1,10 @@
-﻿using ChongGuanSafetySupervisionQZ.Model;
+﻿using ChongGuanDotNetUtils.Helpers;
+using ChongGuanSafetySupervisionQZ.Model;
 using ChongGuanSafetySupervisionQZ.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -23,6 +25,8 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private CheckingHardwareWindow checkingHardwareWindow = new CheckingHardwareWindow();
+
         public MainWindow()
         {
             //StyleManager.ApplicationTheme = new MaterialTheme();
@@ -124,7 +128,7 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
                 IsDeleteId = 0,
                 IsForbidden = 0,
                 LoginName = this.TextBox_AdminUserName.Text,
-                LoginPwd = this.RadPasswordBox_AdminPassword.Text,
+                LoginPwd = this.RadPasswordBox_AdminPassword.Password,
                 ModifyTime = DateTime.Now.ToString(),
                 UserCode = Guid.NewGuid().ToString("N"),
                 UserName = "超级管理员",
@@ -142,9 +146,10 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
             {
                 RadWindow.Alert(new DialogParameters
                 {
-                    Content = addUser_result.Message,
-                    Header = "添加管理员失败",
-                    Owner = Application.Current.MainWindow,
+                    Header = new TextBlock { Text = "添加管理员失败", FontFamily = new FontFamily("微软雅黑"), IsHitTestVisible = false, Foreground = new SolidColorBrush(Colors.White) },
+                    Content = new TextBlock { Text = addUser_result.Message, FontFamily = new FontFamily("微软雅黑"), IsHitTestVisible = false },
+
+                    Owner = this,
                     Theme = new MaterialTheme()
                 });
 
@@ -167,9 +172,11 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
             {
                 RadWindow.Alert(new DialogParameters
                 {
-                    Content = addUser_result.Message,
-                    Header = "添加部门信息失败",
-                    Owner = Application.Current.MainWindow,
+                    Header = new TextBlock { Text = "添加部门信息失败", FontFamily = new FontFamily("微软雅黑"), IsHitTestVisible = false, Foreground = new SolidColorBrush(Colors.White) },
+                    Content = new TextBlock { Text = addDeparment_result.Message, FontFamily = new FontFamily("微软雅黑"), IsHitTestVisible = false },
+
+
+                    Owner = this,
                     Theme = new MaterialTheme()
                 });
 
@@ -183,6 +190,27 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
 
             ChongGuanSafetySupervisionQZ.DAL.Role_UserDAL role_UserDAL = new DAL.Role_UserDAL();
             await role_UserDAL.Add(new QZ_Role { RoleId = 1 }, GlobalData.CurrentUser);
+
+            GlobalData.CurrnetRole = new QZ_Role { RoleId = 1 };
+
+            //RegistryHelper.SetRegistryData(@"ChongGuan\ChongGuanSafetySupervisionQZ",
+            //    "Registered", "1");
+
+            CreateRegFile();
+
+            checkingHardwareWindow.Show();
+            //dXRibbonMainWindow.Show();
+            this.Close();
+        }
+
+        private void CreateRegFile()
+        {
+            if (!Directory.Exists($"{AppDomain.CurrentDomain.BaseDirectory}chongguanData\\"))
+            {
+                Directory.CreateDirectory($"{AppDomain.CurrentDomain.BaseDirectory}chongguanData\\");
+            }
+
+            File.Create($"{AppDomain.CurrentDomain.BaseDirectory}chongguanData\\isreg.lock");
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
@@ -195,7 +223,7 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
                 Content = new TextBlock { Text = "确定退出本系统吗？", FontFamily = new FontFamily("微软雅黑"), IsHitTestVisible = false },
 
                 //Closed = new EventHandler<WindowClosedEventArgs>(OnClosed),
-                Owner = Application.Current.MainWindow,
+                Owner = this,
                 Theme = new MaterialTheme(),
 
                 Closed = (_, __) =>
@@ -225,7 +253,7 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
                         RadPasswordBox_AdminPasswordConfim.Clear();
                         RadPasswordBox_AdminPasswordConfim.Focus();
                     },
-                    Owner = Application.Current.MainWindow,
+                    Owner = this,
                     Theme = new MaterialTheme()
                 });
             }
