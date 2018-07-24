@@ -44,7 +44,17 @@ namespace ChongGuanSafetySupervisionQZ.DAL
                         select e;
 
             IEnumerable<QZ_Party> data = query.ToList();
-            ResultData<IEnumerable<QZ_Party>> result = new ResultData<IEnumerable<QZ_Party>> { IsSuccessed = true, Message = "", Data = data };
+
+            List<QZ_Party> resultData = new List<QZ_Party>();
+
+            foreach (var d in data)
+            {
+                QZ_Party t = new QZ_Party();
+                ReflectionHelper.CopyProperties<QZ_Party>(d, t, new String[] { });
+                resultData.Add(t);
+            }
+
+            ResultData<IEnumerable<QZ_Party>> result = new ResultData<IEnumerable<QZ_Party>> { IsSuccessed = true, Message = "", Data = resultData };
 
             return result;
         }

@@ -54,7 +54,7 @@ namespace ChongGuanSafetySupervisionQZ.ViewModel
             }
         }
 
-        public async void SavePartyInfo(string deparmentId,string userId)
+        public async void SavePartyInfo(string deparmentId = "1",string userId = "1")
         {
             ChongGuanSafetySupervisionQZ.DAL.PartyDAL partyDAL = new DAL.PartyDAL();
             ResultData<QZ_Party> result;
@@ -65,8 +65,8 @@ namespace ChongGuanSafetySupervisionQZ.ViewModel
             }
             else
             {
-                _party.CreateDepartmentId = deparmentId;
-                _party.CreateUserId = userId;
+                _party.CreateDepartmentId = deparmentId ?? "1";
+                _party.CreateUserId = userId ?? "1";
                 result = await partyDAL.Add(_party);
             }
 
@@ -87,7 +87,7 @@ namespace ChongGuanSafetySupervisionQZ.ViewModel
                 Party = result.Data.FirstOrDefault();
                 _isPartyInfoInDB = true;
             }
-
+            else
             //test
             {
                 //Party = new QZ_Party

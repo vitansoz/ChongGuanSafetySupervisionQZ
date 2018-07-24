@@ -9,7 +9,7 @@ namespace ChongGuanSafetySupervisionQZ.Model
     public partial class QZ_Party
     {
         [Key]
-        [StringLength(32)]
+        [StringLength(64)]
         public string PartyId { get; set; }
 
         [StringLength(32)]

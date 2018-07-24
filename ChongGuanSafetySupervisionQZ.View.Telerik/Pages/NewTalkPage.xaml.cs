@@ -58,7 +58,8 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF.Pages
         {
             if (!_isConfimPartyInfo)
             {
-                GlobalData.NewTalkViewModel.SavePartyInfo(GlobalData.CurrentDeparment.DeparmentId,GlobalData.CurrentUser.UserId);
+                GlobalData.NewTalkViewModel.SavePartyInfo(GlobalData.CurrentDeparment?.DeparmentId.ToString(),
+                    GlobalData.CurrentUser?.UserId.ToString());
 
                 GroupBox_PoliceInfo.Visibility = Visibility.Visible;
                 Button_Confim.Content = "开始谈话";
@@ -75,7 +76,7 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF.Pages
         {
             if (!_isConfimPartyInfo)
             {
-                GlobalData.NewTalkViewModel.GetPartyInfoByIdCard("");
+                GlobalData.NewTalkViewModel.GetPartyInfoByIdCard(this.TextBox_IdNnumber.Text);
             }
             else
             {

@@ -9,7 +9,7 @@ namespace ChongGuanSafetySupervisionQZ.Model
     public partial class QZ_Inquiry
     {
         [Key]
-        [StringLength(32)]
+        [StringLength(64)]
         public string InquiryId { get; set; }
 
         [Required]

@@ -9,7 +9,7 @@ namespace ChongGuanSafetySupervisionQZ.Model
     public partial class QZ_Event
     {
         [Key]
-        [StringLength(32)]
+        [StringLength(64)]
         public string EventId { get; set; }
 
         [Required]
