@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Telerik.Windows.Controls;
 
 namespace ChongGuanSafetySupervisionQZ.View.WPF
 {
@@ -37,6 +38,49 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
             this.Grid_MainNavigationButtons.Visibility = Visibility.Collapsed;
             this.Frame_BusinessPage.Visibility = Visibility.Visible;
             this.Frame_BusinessPage.Source = new Uri("Pages/NewTalkPage.xaml", UriKind.Relative);   
+        }
+
+        private void Exit_Click(object sender, MouseButtonEventArgs e)
+        {
+            RadWindow.Confirm(new DialogParameters
+            {
+                Header = new TextBlock { Text = "退出", FontFamily = new FontFamily("微软雅黑"), IsHitTestVisible = false, Foreground = new SolidColorBrush(Colors.White) },
+                Content = new TextBlock { Text = "确定退出本系统吗？", FontFamily = new FontFamily("微软雅黑"), IsHitTestVisible = false },
+
+                //Closed = new EventHandler<WindowClosedEventArgs>(OnClosed),
+                Owner = this,
+                Theme = new MaterialTheme(),
+
+                Closed = (_, __) =>
+                {
+                    if (__.DialogResult.Value)
+                    {
+                        Application.Current.Shutdown();
+                    }
+                    else
+                    {
+                        //MessageBox.Show("FUCK");
+                    }
+                }
+            });
+        }
+
+        private void GoHome_Click(object sender, MouseButtonEventArgs e)
+        { 
+            GoHome();
+        }
+
+        public void GoHome()
+        {
+            this.Grid_MainNavigationButtons.Visibility = Visibility.Visible;
+            this.Frame_BusinessPage.Visibility = Visibility.Collapsed;
+            this.Frame_BusinessPage.Source = null;
+            //this.Frame_BusinessPage.RemoveBackEntry();
+        }
+
+        private void ModifyUserInfo_Click(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

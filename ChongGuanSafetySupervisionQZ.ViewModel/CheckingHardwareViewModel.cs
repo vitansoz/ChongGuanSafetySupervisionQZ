@@ -18,7 +18,11 @@ namespace ChongGuanSafetySupervisionQZ.ViewModel
         public bool IsFingerprintGood { get => _isFingerprintGood; set => this.MutateVerbose(ref _isFingerprintGood, value, args => PropertyChanged?.Invoke(this, args)); }
 
         private bool _isSignatureGood;
-        public bool IsSignatureGood { get => _isSignatureGood; set => this.MutateVerbose(ref _isSignatureGood, value, args => PropertyChanged?.Invoke(this, args)); }
+        public bool IsSignatureGood
+        {
+            get => _isSignatureGood;
+            set => this.MutateVerbose(ref _isSignatureGood, value, args => PropertyChanged?.Invoke(this, args));
+        }
 
         private bool _isSceneCameraGood;
         public bool IsSceneCameraGood { get => _isSceneCameraGood; set => this.MutateVerbose(ref _isSceneCameraGood, value, args => PropertyChanged?.Invoke(this, args)); }

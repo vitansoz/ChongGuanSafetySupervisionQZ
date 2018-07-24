@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="CheckingHardwareViewModel.cs" />
     <Compile Include="ChinaCitiesViewModel.cs" />
+    <Compile Include="NewTalkViewModel.cs" />
     <Compile Include="NotifyPropertyChangedExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

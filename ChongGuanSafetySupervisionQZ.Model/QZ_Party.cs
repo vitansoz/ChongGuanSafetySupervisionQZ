@@ -12,6 +12,24 @@ namespace ChongGuanSafetySupervisionQZ.Model
         [StringLength(32)]
         public string PartyId { get; set; }
 
+        [StringLength(32)]
+        public string PartyNumber { get; set; }
+
+        [StringLength(32)]
+        public string PartyDetentionDate { get; set; }
+
+        [StringLength(64)]
+        public string PartyPrison { get; set; }
+
+        [StringLength(64)]
+        public string PartyMonitoringArea { get; set; }
+
+        [StringLength(64)]
+        public string PartyMonitoringRoom { get; set; }
+
+        [StringLength(128)]
+        public string PartyDetentionReason { get; set; }
+
         [Required]
         [StringLength(32)]
         public string PartyName { get; set; }
@@ -29,7 +47,11 @@ namespace ChongGuanSafetySupervisionQZ.Model
         public string PartyCard { get; set; }
 
         [StringLength(128)]
-        public string PartyAddress { get; set; }
+        public string PartyAddress
+        {
+            get;
+            set;
+        }
 
         [StringLength(128)]
         public string PartyUnit { get; set; }

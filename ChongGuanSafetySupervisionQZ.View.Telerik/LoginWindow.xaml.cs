@@ -27,7 +27,7 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
             InitializeComponent();
 
             //test
-            this.TextBox_UserName.Text = "zhanyanjing";
+            this.TextBox_UserName.Text = "petto";
             this.RadPasswordBox_Password.Password = "123456";
         }
 

@@ -52,6 +52,7 @@ namespace ChongGuanSafetySupervisionQZ.Model
         public virtual DbSet<QZ_Role> QZ_Role { get; set; }
         public virtual DbSet<QZ_Role_User> QZ_Role_User { get; set; }
         public virtual DbSet<QZ_User> QZ_User { get; set; }
+        public virtual DbSet<QZ_TalkType> QZ_TalkType { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

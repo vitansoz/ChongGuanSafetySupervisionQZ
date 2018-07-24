@@ -12,8 +12,10 @@ namespace ChongGuanSafetySupervisionQZ.ViewModel
     {
         public static void MutateVerbose<TField>(this INotifyPropertyChanged instance, ref TField field, TField newValue, Action<PropertyChangedEventArgs> raise, [CallerMemberName] string propertyName = null)
         {
-            if (EqualityComparer<TField>.Default.Equals(field, newValue)) return;
-            field = newValue;
+            if (!EqualityComparer<TField>.Default.Equals(field, newValue))
+            {
+                field = newValue;
+            }
             raise?.Invoke(new PropertyChangedEventArgs(propertyName));
         }
     }

@@ -32,7 +32,9 @@
         <TextBlock Text="执法取证一体化系统" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Opacity="1" 
                        Foreground="WhiteSmoke"  FontSize="45" HorizontalAlignment="Center"/>
 
-        <GroupBox  Header="Card Group Box" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="180,16,180,60"
+        <GroupBox  Header="Card Group Box" 
+                   Style="{DynamicResource MaterialDesignCardGroupBox}" 
+                   Margin="180,16,180,60"
                    Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  >
             <GroupBox.HeaderTemplate>
                 <DataTemplate>

@@ -15,5 +15,7 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
         public static QZ_Deparment CurrentDeparment { get; set; }
 
         public static CheckingHardwareViewModel CheckingHardwareViewModel { get; set; }
+        public static NewTalkViewModel NewTalkViewModel { get; set; }
+        
     }
 }

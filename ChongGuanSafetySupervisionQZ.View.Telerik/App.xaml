@@ -6,6 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <converter:BoolVisibilityConverter x:Key="BoolToVisibility" />
+            <converter:SexIntConverter x:Key="SexToInt" />
             <Style TargetType="{x:Type TextElement }">
                 <Setter Property="FontFamily" Value="微软雅黑"/>
             </Style>

@@ -68,6 +68,7 @@
     <Compile Include="PartyDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role_UserDAL.cs" />
+    <Compile Include="TalkTypeDAL.cs" />
     <Compile Include="UserDAL.cs" />
   </ItemGroup>
   <ItemGroup>
