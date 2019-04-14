@@ -19,8 +19,8 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
         {
             this.InitializeComponent();
 
-            StartupUri = new Uri("HomeWindow.xaml", UriKind.Relative);
-            //StartupUri = IsReged() ? new Uri("LoginWindow.xaml", UriKind.Relative) : new Uri("MainWindow.xaml", UriKind.Relative);
+            //StartupUri = new Uri("HomeWindow.xaml", UriKind.Relative);
+            StartupUri = IsReged() ? new Uri("LoginWindow.xaml", UriKind.Relative) : new Uri("MainWindow.xaml", UriKind.Relative);
 
             foreach (var dictionary in Application.Current.Resources.MergedDictionaries)
             {

@@ -1,0 +1,279 @@
+﻿<Page x:Class="ChongGuanSafetySupervisionQZ.View.WPF.Pages.TalkingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ChongGuanSafetySupervisionQZ.View.WPF.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:Converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf" 
+      xmlns:wfi ="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+      xmlns:aforge ="clr-namespace:AForge.Controls;assembly=AForge.Controls"
+      xmlns:userControls="clr-namespace:ChongGuanSafetySupervisionQZ.View.WPF.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="TalkingPage">
+    <Page.Resources>
+        <Style x:Key="TextBoxStyle_Talking" TargetType="{x:Type TextBox}">
+
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" BorderBrush="Gray" BorderThickness="1" Margin="8,8,0,8">
+            <GroupBox Header="控制台"  Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Width="Auto" Background="#CCF5FF" FontSize="16.668" Name="GroupBox_Console">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Button Name="Button_StartTalking"  Style="{DynamicResource MaterialDesignRaisedButton}" 
+                        Grid.Column="0" Grid.Row="0"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="120" Height="80"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0" Background="#0078D7"
+                        IsEnabled="{Binding IsStartButtonEnable}"
+                        Click="Button_StartTalking_Click" >
+                        开始询问
+                    </Button>
+                    <Button Name="Button_PauseTalking"  Style="{DynamicResource MaterialDesignRaisedButton}" 
+                        Grid.Column="0" Grid.Row="1"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="120" Height="80"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0" Background="#0078D7"
+                        IsEnabled="{Binding IsPauseButtonEnable}"
+                        Click="Button_PauseTalking_Click" >
+                        暂停询问
+                    </Button>
+                    <Button Name="Button_EndTalking"  Style="{DynamicResource MaterialDesignRaisedButton}" 
+                        Grid.Column="0" Grid.Row="2"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="120" Height="80"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0" Background="#0078D7"
+                        IsEnabled="{Binding IsStopButtonEnable}"
+                        Click="Button_EndTalking_Click" >
+                        结束询问
+                    </Button>
+                    <Button Name="Button_CreateBook"  Style="{DynamicResource MaterialDesignRaisedButton}" 
+                        Grid.Column="0" Grid.Row="3"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="120" Height="80"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0" Background="#0078D7"
+                        IsEnabled="{Binding IsCreateLawBookButtonEnable}"
+                        Click="Button_CreateBook_Click" >
+                        生成文书
+                    </Button>
+                </Grid>
+            </GroupBox>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="1" Margin="8,8,8,0">
+            <GroupBox Header="受审人信息"  Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Width="Auto" Background="#CCF5FF" FontSize="16.668" Name="GroupBox_PartyInfo">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="30,5">
+                        <TextBlock Text="姓名：" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Party.PartyName}" VerticalAlignment="Center" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="0" Grid.Row="1"  Orientation="Horizontal" Margin="30,5">
+                        <TextBlock Text="性别：" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Party.PartySex}" VerticalAlignment="Center" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Margin="30,5">
+                        <TextBlock Text="生日：" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Party.PartyBirth}" VerticalAlignment="Center" />
+                        <!--<TextBox Text="{Binding Party.PartyBirth}" IsReadOnly="True" VerticalAlignment="Center" />-->
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="30,5">
+                        <TextBlock Text="民族：" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Party.PartyNational}" VerticalAlignment="Center" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal" Margin="30,5">
+                        <TextBlock Text="身份证号：" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Party.PartyCard}" VerticalAlignment="Center" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" Margin="30,5">
+                        <TextBlock Text="家庭住址：" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Party.PartyAddress}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="1" Margin="8,8,8,8">
+            <GroupBox   Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Width="Auto" Background="#CCF5FF" FontSize="16.668" 
+                      Name="GroupBox_Videos">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="监控窗口" Foreground="#EEF3F8"/>
+                        <TextBlock Text=" - " Foreground="#EEF3F8"/>
+                        <!--<TextBlock Text="{Binding IsRunning,Converter={StaticResource IsRunningToString},ConverterParameter=videos}" Foreground="#EEF3F8"/>-->
+                        <TextBlock Text="{Binding VideoStateString}" Foreground="#EEF3F8"/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <Grid Name="Grid_Video">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <wfi:WindowsFormsHost Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Background="AliceBlue" RenderTransformOrigin="0.5,0.5">
+                        <aforge:VideoSourcePlayer x:Name="VideoSourcePlayer_Front" />
+                    </wfi:WindowsFormsHost>
+                    <wfi:WindowsFormsHost Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="1" Background="AliceBlue" RenderTransformOrigin="0.5,0.5">
+                        <aforge:VideoSourcePlayer x:Name="VideoSourcePlayer_Back" />
+                    </wfi:WindowsFormsHost>
+                    <wfi:WindowsFormsHost Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Background="AliceBlue" RenderTransformOrigin="0.5,0.5">
+                        <aforge:VideoSourcePlayer x:Name="VideoSourcePlayer_Scene" />
+                    </wfi:WindowsFormsHost>
+
+                    <Slider Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+                            Name="Slider_AudioPeak" Value="0" Visibility="Collapsed"
+                            TickFrequency="5" TickPlacement="BottomRight" Orientation="Vertical" Minimum="0" Maximum="100" />
+
+                    <ProgressBar Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+                                 Name="ProgressBar_AudioPeak" Minimum="0" Maximum="100"
+                        Orientation="Vertical" Height="15" IsIndeterminate="False" />
+                </Grid>
+            </GroupBox>
+        </Border>
+        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="1" Margin="8,0,8,8">
+        </Border>
+        <Border Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" Grid.RowSpan="2" BorderBrush="Gray" BorderThickness="1" Margin="0,8,8,8">
+            <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Width="Auto" Background="#CCF5FF" FontSize="16.668" 
+                      Name="GroupBox_TalkingMessage">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="询问记录" Foreground="#EEF3F8"/>
+                        <TextBlock Text=" - " Foreground="#EEF3F8"/>
+                        <!--<TextBlock Text="{Binding IsRunning,Converter={StaticResource IsRunningToString},ConverterParameter=talking}" Foreground="#EEF3F8"/>-->
+                        <TextBlock Text="{Binding MessageListStateString}" Foreground="#EEF3F8"/>
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding DurationTime}" Foreground="#EEF3F8" Visibility="{Binding IsShowDurationTime,Converter={StaticResource BoolToVisibility}}"/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ListBox Name="ListBox_MessageList" ItemsSource="{Binding MessageList}" Background="WhiteSmoke"                             
+                             materialDesign:RippleAssist.IsDisabled="True">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <userControls:TalkingMessageControl
+                                    Height="Auto"
+                                    MessageTime="{Binding MessageTime}"
+                                    MessageContent="{Binding MessageContent}"
+                                    MessageTypeIsParty="{Binding MessageTypeIsParty}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Grid.RowSpan="1" BorderBrush="Gray" BorderThickness="1" Margin="0,8,0,0">
+                        <Grid Height="Auto" Background="White">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="TextBlock_State" Text="{Binding IsPartySpeeking,Converter={StaticResource MessageTypeIsPartyToString}}" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="15.667"/>
+                            <Grid Height="1" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="432*"/>
+                                    <ColumnDefinition Width="41*"/>
+                                    <ColumnDefinition Width="13*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Offset="0.0" Color="#00808080" />
+                                        <GradientStop Offset="0.5" Color="#66808080" />
+                                        <GradientStop Offset="1.0" Color="#00808080" />
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                            </Grid>
+                            <Button Name="Button_OpenCloseVoiceConversion" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="15.667" Margin="10" Width="160" Visibility="Collapsed">
+                                开启语音转换
+                            </Button>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Height="30" VerticalAlignment="Center" Orientation="Horizontal">
+                                <TextBlock Text="语音转换"  FontSize="15.667" VerticalAlignment="Center"/>
+                                <ToggleButton Name="ToggleButton_OpenCloseVoiceConversion" Style="{StaticResource MaterialDesignSwitchToggleButton}" 
+                                              IsChecked="{Binding IsOpenVoiceConversion}"
+                                              IsEnabled="{Binding IsRunning}"
+                                              VerticalAlignment="Center" Margin="5,0,5,0"                                              
+                                              Checked="ToggleButton_OpenCloseVoiceConversion_Checked"
+                                              Unchecked="ToggleButton_OpenCloseVoiceConversion_UnChecked"/>
+                            </StackPanel>
+                            <TextBox  Name="TextBox_CurrentTalkingCountent" BorderThickness="0"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="8" VerticalAlignment="Top"                                
+                                      AcceptsReturn="True"
+                                      TextWrapping="Wrap"
+                                      VerticalScrollBarVisibility="Auto"
+                                      Height="100"
+                                      IsEnabled="{Binding IsRunning}" 
+                                      Style="{DynamicResource TextBoxStyle_Talking}" KeyDown="TextBox_CurrentTalkingCountent_KeyDown" />
+
+                            <Button Name="Button_Submit" Grid.Row="2" Grid.Column="2" 
+                                    Click="Button_Submit_Click">
+                                提交
+                            </Button>
+
+                            <Button Name="Button_Clear" Grid.Row="2" Grid.Column="1" Margin="0,0,30,0"
+                                    Click="Button_Clear_Click">
+                                清除
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            </GroupBox>
+        </Border>
+
+        <Grid Name="Grid_Mask" ColumnSpan="3" Grid.RowSpan="3" Background="Gray" Opacity="0.7" Visibility="Collapsed"/>
+
+        <StackPanel Name="StarkPanel_CreateLawbook" Grid.ColumnSpan="3" Grid.RowSpan="3"  Visibility="Collapsed"
+            HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <materialDesign:Card 
+            UniformCornerRadius="34" Name="ProgressBar_Create" 
+            Padding="1"  Height="50" Width="50">
+                <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" Height="30" Width="30" Value="50" IsIndeterminate="True" />
+            </materialDesign:Card>
+            <TextBlock Text="正在生成文书,请稍候..." Margin="0,20" FontSize="20.667" Foreground="WhiteSmoke"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

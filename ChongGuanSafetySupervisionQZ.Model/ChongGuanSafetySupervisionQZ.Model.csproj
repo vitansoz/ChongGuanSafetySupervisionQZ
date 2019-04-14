@@ -68,6 +68,7 @@
     <Compile Include="QZ_Deparment.cs" />
     <Compile Include="QZ_Deparment_User.cs" />
     <Compile Include="QZ_Event.cs" />
+    <Compile Include="QZ_InquirryAndParty.cs" />
     <Compile Include="QZ_Inquiry.cs" />
     <Compile Include="QZ_Party.cs" />
     <Compile Include="QZ_Role.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="QZ_TalkType.cs" />
     <Compile Include="QZ_User.cs" />
     <Compile Include="ResultData.cs" />
+    <Compile Include="sb.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

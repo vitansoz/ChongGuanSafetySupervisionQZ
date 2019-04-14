@@ -32,7 +32,11 @@ namespace ChongGuanSafetySupervisionQZ.Model
 
         [Required]
         [StringLength(32)]
-        public string PartyName { get; set; }
+        public string PartyName
+        {
+            get;
+            set;
+        }
 
         [StringLength(2)]
         public string PartySex { get; set; }

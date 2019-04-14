@@ -16,6 +16,12 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
 
         public static CheckingHardwareViewModel CheckingHardwareViewModel { get; set; }
         public static NewTalkViewModel NewTalkViewModel { get; set; }
-        
+        public static TalkingPageViewModel TalkingPageViewModel { get; set; }
+        public static TalkingRecordManageViewModel TalkingRecordManageViewModel { get; set; }
+        public static SatisticsPageViewModel SatisticsPageViewModel { get; set; }
+
+        public static DateTime CurrentTalkingStartTime { get; set; }
+        public static DateTime CurrentTalkingEndTime { get; set; }
+
     }
 }

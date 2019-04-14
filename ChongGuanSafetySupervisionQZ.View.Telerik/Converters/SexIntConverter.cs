@@ -14,7 +14,7 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF.Converters
         {
             if (value == null)
             {
-                return "-1";
+                return "0";
             }
 
             if (value.ToString() == "女")

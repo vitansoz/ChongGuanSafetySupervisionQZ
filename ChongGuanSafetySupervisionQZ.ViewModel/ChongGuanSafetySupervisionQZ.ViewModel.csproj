@@ -30,7 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.DirectX, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\Microsoft.NET\DirectX for Managed Code\1.0.2902.0\Microsoft.DirectX.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectSound, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\Microsoft.NET\DirectX for Managed Code\1.0.2902.0\Microsoft.DirectX.DirectSound.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,13 +49,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BussinessModel\InquiryAndPartyModel.cs" />
+    <Compile Include="BussinessModel\SatisticsDataModel.cs" />
+    <Compile Include="BussinessModel\TalkingMessageModel.cs" />
+    <Compile Include="BussinessModel\TestTalkingInfoModel.cs" />
     <Compile Include="CheckingHardwareViewModel.cs" />
     <Compile Include="ChinaCitiesViewModel.cs" />
+    <Compile Include="Enum\Enums.cs" />
     <Compile Include="NewTalkViewModel.cs" />
     <Compile Include="NotifyPropertyChangedExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SatisticsPageViewModel.cs" />
+    <Compile Include="TalkingPageViewModel.cs" />
+    <Compile Include="TalkingRecordManageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ChongGuanDotNetUtils\ChongGuanDotNetUtils.csproj">
+      <Project>{820c0b35-4c65-4ecc-8729-0832f6acd0e4}</Project>
+      <Name>ChongGuanDotNetUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ChongGuanSafetySupervisionQZ.DAL\ChongGuanSafetySupervisionQZ.DAL.csproj">
       <Project>{b5d7c4a5-f31f-45f4-a6cc-844cf356a1cd}</Project>
       <Name>ChongGuanSafetySupervisionQZ.DAL</Name>
@@ -59,6 +80,9 @@
       <Project>{0998ec03-adba-47e1-8bb3-cac7591bfc78}</Project>
       <Name>ChongGuanSafetySupervisionQZ.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

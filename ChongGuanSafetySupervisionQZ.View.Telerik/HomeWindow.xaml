@@ -29,15 +29,19 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Image Margin="5,5" Source="Resources/Images/gh.png" HorizontalAlignment="Left" Stretch="Uniform" />
+                <Image Margin="15,15" Source="Resources/Images/gh.png" HorizontalAlignment="Left" Stretch="Uniform" />
 
-                <StackPanel Grid.Row="0" Grid.Column="1" Margin="40,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Orientation="Horizontal">
-                    <TextBlock Name="TextBlock_Department"  Margin="0,0,0,24" 
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">
+                    <TextBlock Name="TextBlock_Department"  Margin="0,0,0,0" 
                        FontSize="46.667" Foreground="WhiteSmoke"
                        Text="fuck"/>
-                    <TextBlock Name="TextBlock_FixedSystem"  Margin="20,0,0,24"
+                    <!--<TextBlock Name="TextBlock_FixedSystem"  Margin="20,0,0,24"
                        FontSize="30.667" Foreground="#FF00FFFF" VerticalAlignment="Bottom"
-                       Text="执法取证一体化系统"/>
+                       Text="执法取证一体化系统"/>-->
+
+                    <TextBlock Name="TextBlock_FixedSystem"  Margin="20,0,0,6"
+                       FontSize="30.667" Foreground="#FF00FFFF" VerticalAlignment="Bottom"
+                       Text="监所一体化管教谈话系统"/>
                 </StackPanel>
                 <Grid Grid.Row="0" Grid.Column="2" Margin="10,5">
                     <Grid.RowDefinitions>
@@ -111,7 +115,8 @@
                 </Grid.ColumnDefinitions>
                 <Button  Style="{DynamicResource MaterialDesignRaisedButton}" Grid.Column="0" Grid.Row="1"
                          materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                         Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Background="#0078D7">
+                         Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Background="#0078D7"
+                         Click="Button_SearchRecorder">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal" Margin="20,35">
                             <Image Source="Resources/Images/u101.png" Margin="10"/>
@@ -132,11 +137,12 @@
                 </Grid.ColumnDefinitions>
                 <Button  Style="{DynamicResource MaterialDesignRaisedButton}" Grid.Column="1" Grid.Row="0"
                          materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                         Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Background="#0078D7">
+                         Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Background="#0078D7"
+                         Click="Button_Satistics_Click">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal" Margin="20,35">
                             <Image Source="Resources/Images/u114.png" Margin="10"/>
-                            <TextBlock Margin="10,0,0,0" FontSize="30.667" HorizontalAlignment="Center" VerticalAlignment="Center" Text="外设管理" />
+                            <TextBlock Margin="10,0,0,0" FontSize="30.667" HorizontalAlignment="Center" VerticalAlignment="Center" Text="数据统计" />
                         </StackPanel>
                     </Button.Content>
                 </Button>
@@ -164,7 +170,7 @@
                 </Button>
             </Grid>
         </Grid>
-        <Frame Name="Frame_BusinessPage" Grid.Column="0" Grid.Row="1" Background="WhiteSmoke" Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Height="Auto" Width="Auto">
+        <Frame Name="Frame_BusinessPage" Grid.Column="0" Grid.Row="1" Background="WhiteSmoke" Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Height="Auto" Width="Auto" >
         </Frame>
     </Grid>
 

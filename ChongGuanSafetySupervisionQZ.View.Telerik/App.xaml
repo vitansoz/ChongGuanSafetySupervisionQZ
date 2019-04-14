@@ -7,6 +7,11 @@
         <ResourceDictionary>
             <converter:BoolVisibilityConverter x:Key="BoolToVisibility" />
             <converter:SexIntConverter x:Key="SexToInt" />
+            <converter:TalkTypeIntConverter x:Key="TalkTypeToInt" />
+            <converter:TalkTypeIntConverterForSearch x:Key="TalkTypeToIntForSearch" />
+            <converter:MessageTypeIsPartyStringConverter x:Key="MessageTypeIsPartyToString" />
+            <converter:IsRunningStringConverter x:Key="IsRunningToString" />
+            <converter:BoolReverseConverter x:Key="BoolReverseConverter" />
             <Style TargetType="{x:Type TextElement }">
                 <Setter Property="FontFamily" Value="微软雅黑"/>
             </Style>
@@ -15,6 +20,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         

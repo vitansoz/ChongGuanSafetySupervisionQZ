@@ -26,14 +26,14 @@ namespace ChongGuanSafetySupervisionQZ.DAL
 
                 message = string.Empty;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
             }
             ResultData<QZ_Party> result = new ResultData<QZ_Party> { IsSuccessed = true, Message = message, Data = qZ_Party };
             return result;
         }
 
-        public ResultData<IEnumerable<QZ_Party>> Qurey(string partyId = "", string createUserId = "", string createDepartmentId = "",string partyCard = "") 
+        public ResultData<IEnumerable<QZ_Party>> Qurey(string partyId = "", string createUserId = "", string createDepartmentId = "", string partyCard = "")
         {
 
             var query = from e in ModelQZ.DatabaseContext.QZ_Party
@@ -89,10 +89,10 @@ namespace ChongGuanSafetySupervisionQZ.DAL
 
         public async Task<ResultData<QZ_Party>> Update(QZ_Party qZ_Party)
         {
-            string message = "事件不存在";
+            string message = "在押人员信息不存在";
 
             var query = from e in ModelQZ.DatabaseContext.QZ_Party
-                        where e.PartyId == qZ_Party.PartyId
+                        where (e.PartyId == qZ_Party.PartyId || e.PartyCard == qZ_Party.PartyCard)
                         select e;
 
             QZ_Party data = query.FirstOrDefault();
@@ -112,6 +112,41 @@ namespace ChongGuanSafetySupervisionQZ.DAL
             ResultData<QZ_Party> result = new ResultData<QZ_Party> { IsSuccessed = data != null, Message = message, Data = data };
 
             return result;
+        }
+
+        public async Task<ResultData<QZ_Party>> UpdateByCard(QZ_Party qZ_Party)
+        {
+            try
+            {
+                string message = "在押人员信息不存在";
+
+                var query = from e in ModelQZ.DatabaseContext.QZ_Party
+                            where (e.PartyCard == qZ_Party.PartyCard)
+                            select e;
+
+                QZ_Party data = query.FirstOrDefault();
+
+                if (data != null)
+                {
+                    ReflectionHelper.CopyProperties<QZ_Party>(qZ_Party, data, new String[] { "PartyId", "CreateUserId", "CreateDepartmentId","CreateTime" });
+
+                    data.ModifyTime = DateTime.Now.ToString();
+
+                    ModelQZ.DatabaseContext.Entry(data).State = System.Data.Entity.EntityState.Modified;
+                    await ModelQZ.DatabaseContext.SaveChangesAsync();
+
+                    message = string.Empty;
+                }
+
+                ResultData<QZ_Party> result = new ResultData<QZ_Party> { IsSuccessed = data != null, Message = message, Data = data };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+                throw ex;
+            }
         }
     }
 }

@@ -22,12 +22,13 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
     public partial class LoginWindow : Window
     {
         private CheckingHardwareWindow checkingHardwareWindow = new CheckingHardwareWindow();
+        private HomeWindow homeWindow = new HomeWindow();
         public LoginWindow()
         {
             InitializeComponent();
 
             //test
-            this.TextBox_UserName.Text = "petto";
+            this.TextBox_UserName.Text = "admin";
             this.RadPasswordBox_Password.Password = "123456";
         }
 
@@ -141,6 +142,7 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
 
             //dXRibbonMainWindow.Show();
             checkingHardwareWindow.Show();
+            //homeWindow.Show();
             this.Close();
 
             IsLoginningOrDone(false);

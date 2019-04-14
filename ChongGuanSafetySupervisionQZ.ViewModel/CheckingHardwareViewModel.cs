@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -56,6 +57,7 @@ namespace ChongGuanSafetySupervisionQZ.ViewModel
 
         private IntPtr _m_hDevice = IntPtr.Zero;
         private IntPtr _mainHwnd;
+
 
         public async void InitHardware(IntPtr hwnd)
         {
@@ -119,22 +121,61 @@ namespace ChongGuanSafetySupervisionQZ.ViewModel
                 case 2:
                     {
                         CheckingProgress += 5;
-                        this._m_hDevice = ZwClass.ZKFPModule_Connect("protocol=USB,vendor-id=6997,product-id=289");
-                        bool flag2 = this._m_hDevice == IntPtr.Zero;
-                        if (flag2)
-                        {
-                            OutputMessage = OutMessages.Init_ZW_Error_Msg;
-                            IsFingerprintGood = false;
 
-                            ErrorHardwareMessage += "指纹识别、";
+                        string flagFinger = ConfigurationManager.AppSettings["FingerFlag"];
+
+                        if (flagFinger == "1")
+                        {
+                            this._m_hDevice = ZwClass.ZKFPModule_Connect("protocol=USB,vendor-id=6997,product-id=289");
+                            bool flag2 = this._m_hDevice == IntPtr.Zero;
+                            if (flag2)
+                            {
+                                OutputMessage = OutMessages.Init_ZW_Error_Msg;
+                                IsFingerprintGood = false;
+
+                                ErrorHardwareMessage += "指纹识别、";
+                            }
+                            else
+                            {
+                                OutputMessage = OutMessages.Init_ZW_OK_Msg;
+                                IsFingerprintGood = true;
+                                OutMessages.IS_ZW_OK = true;
+                                ZwClass.ZKFPModule_Disconnect(this._m_hDevice);
+                                this._m_hDevice = IntPtr.Zero;
+                            }
                         }
                         else
                         {
-                            OutputMessage = OutMessages.Init_ZW_OK_Msg;
-                            IsFingerprintGood = true;
-                            OutMessages.IS_ZW_OK = true;
-                            ZwClass.ZKFPModule_Disconnect(this._m_hDevice);
-                            this._m_hDevice = IntPtr.Zero;
+                            if (FingerClass.Init() == 0)
+                            {
+                                this._m_hDevice = FingerClass.OpenDevice(0);
+                                if (this._m_hDevice != IntPtr.Zero)
+                                {
+                                    OutputMessage = OutMessages.Init_ZW_OK_Msg;
+                                    IsFingerprintGood = true;
+                                    OutMessages.IS_ZW_OK = true;
+                                    FingerClass.Terminate();
+                                    FingerClass.CloseDevice(this._m_hDevice);
+                                }
+                                else
+                                {
+                                    FingerClass.Terminate();
+                                    FingerClass.CloseDevice(this._m_hDevice);
+
+                                    OutputMessage = OutMessages.Init_ZW_Error_Msg;
+                                    IsFingerprintGood = false;
+
+                                    ErrorHardwareMessage += "指纹识别、";
+                                }
+                            }
+                            else
+                            {
+                                FingerClass.Terminate();
+                                OutputMessage = OutMessages.Init_ZW_Error_Msg;
+                                IsFingerprintGood = false;
+
+                                ErrorHardwareMessage += "指纹识别、";
+                            }
                         }
 
                         HasFingerprintChecked = true;

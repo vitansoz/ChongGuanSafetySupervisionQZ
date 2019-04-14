@@ -45,8 +45,8 @@
             <ImageBrush ImageSource="Resources/Images/mainbj001.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
-        <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Source="Resources/Images/gh.png" />
-        <TextBlock Text="执法取证一体化系统" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Opacity="1" 
+        <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Source="Resources/Images/gh.png" Visibility="Collapsed"/>
+        <TextBlock Name="TextBlock_Title" Text="执法取证一体化系统" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Opacity="1" 
                        Foreground="WhiteSmoke"  FontSize="45" HorizontalAlignment="Center"/>
        
         <!--<GroupBox Header="部门信息设置" Style="{DynamicResource MaterialDesignGroupBox}" Margin="100,16,100,16" materialDesign:ShadowAssist.ShadowDepth="Depth3" BorderThickness="0"

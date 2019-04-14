@@ -135,7 +135,7 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Margin="20,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1">
-                        <TextBlock Text="籍贯：       " VerticalAlignment="Center" />
+                        <TextBlock Text="民族：       " VerticalAlignment="Center" />
                         <TextBox Name="TextBox_Birthplace"  VerticalAlignment="Center" Width="180" Margin="2,2,0,0" Padding="2,0,0,0" materialDesign:TransitionAssist.DisableTransitions="True"
                                  Text="{Binding Party.PartyNational,Mode=TwoWay}"/>
                     </StackPanel>
@@ -159,9 +159,9 @@
                                  Text="{Binding Party.PartyAddress,Mode=TwoWay}"/>
                     </StackPanel>
 
-                    <Image Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="0,0,0,0" Height="160" Width="320" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/ChongGuanSafetySupervisionQZ.View.WPF;component/Resources/Images/sfz_zm.png" />
+                    <Image Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="5,0,0,0" Height="160" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/ChongGuanSafetySupervisionQZ.View.WPF;component/Resources/Images/sfz_zm.png" />
                     <TextBlock Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="67,0,0,0"  Text="请刷身份证" VerticalAlignment="Center"  Foreground="Gray" FontSize="20.667"/>
-                    <Image Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="0,0,0,0" Height="160" Width="320" HorizontalAlignment="Left" VerticalAlignment="Top"
+                    <Image Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="10,0,0,0" Height="160" Width="320" HorizontalAlignment="Left" VerticalAlignment="Top"
                            Source="{Binding Party.PartyCardImageFilePath}" />
 
                 </Grid>
@@ -215,7 +215,8 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Name="GroupBox_PoliceInfo" Header="管教谈话基本信息设置" Margin="16,0,16,16" Grid.Row="2" Background="#CCF5FF" FontSize="16.668" Visibility="Collapsed">
+        <GroupBox Name="GroupBox_PoliceInfo" Header="管教谈话基本信息设置" Margin="16,0,16,16" Grid.Row="2" Background="#CCF5FF" FontSize="16.668"
+                  Visibility="Collapsed">
             <Grid  Background="White" Margin="20,10,20,0" Grid.Row="0" VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -232,35 +233,46 @@
 
                 <StackPanel Margin="20,0,0,0" Orientation="Horizontal" VerticalAlignment="Center">
                     <TextBlock Text="管教民警：" VerticalAlignment="Center" />
-                    <TextBox Name="TextBox_PoliceName" materialDesign:TransitionAssist.DisableTransitions="True" Visibility="Visible" VerticalAlignment="Center" Width="180" Margin="2,2,0,0" Padding="2,0,0,0" />
+                    <TextBox Name="TextBox_PoliceName" materialDesign:TransitionAssist.DisableTransitions="True" Visibility="Visible" VerticalAlignment="Center" Width="180" Margin="2,2,0,0" Padding="2,0,0,0" 
+                             Text="{Binding Inquiry.InquiryPoliceName,Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel Margin="20,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1">
-                    <TextBlock Text="管教警号：" VerticalAlignment="Center" />
-                    <TextBox Name="TextBox_PoliceNumber" materialDesign:TransitionAssist.DisableTransitions="True" Visibility="Visible" VerticalAlignment="Center" Width="180" Margin="2,2,0,0" Padding="2,0,0,0" />
+                    <TextBlock Text="民警警号：" VerticalAlignment="Center" />
+                    <TextBox Name="TextBox_PoliceNumber" materialDesign:TransitionAssist.DisableTransitions="True" Visibility="Visible" VerticalAlignment="Center" Width="180" Margin="2,2,0,0" Padding="2,0,0,0" 
+                             Text="{Binding Inquiry.InquiryPoliceNumber,Mode=TwoWay}"/>
                 </StackPanel>
-                <StackPanel Margin="20,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">
+                <StackPanel Margin="20,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">
                     <TextBlock Text="受谈话人：" VerticalAlignment="Center" />
-                    <TextBox Name="TextBox_RespondentNumber" materialDesign:TransitionAssist.DisableTransitions="True" Visibility="Visible" VerticalAlignment="Center" Width="180" Margin="2,2,0,0" Padding="2,0,0,0" />
+                    <TextBox Name="TextBox_RespondentNumber" IsEnabled="False" materialDesign:TransitionAssist.DisableTransitions="True" Visibility="Visible" VerticalAlignment="Center" Width="180" Margin="2,2,0,0" Padding="2,0,0,0" 
+                             Text="{Binding Party.PartyName,Mode=OneWay}"/>
                 </StackPanel>
-                <StackPanel Margin="20,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
+                <StackPanel Margin="20,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1">
                     <TextBlock Text="谈话时间：" VerticalAlignment="Center" />
                     <DatePicker Name="DatePicker_TalkingDate"
                                 Width="180"
+                                Text="{Binding Inquiry.InquiryDate,Mode=TwoWay}"
                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                </StackPanel>
+                <StackPanel Margin="20,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
+                    <TextBlock Text="谈话地点：" VerticalAlignment="Center" />
+                    <TextBox Name="TextBox_TalkingAddress" IsEnabled="True" materialDesign:TransitionAssist.DisableTransitions="True" Visibility="Visible" VerticalAlignment="Center" Width="180" Margin="2,2,0,0" Padding="2,0,0,0" 
+                             Text="{Binding Inquiry.InquiryAddress,Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel Margin="20,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1">
                     <TextBlock Text="谈话类型：" VerticalAlignment="Center" />
                     <ComboBox Name="ComboBox_TalkTpye" DisplayMemberPath="TalkTypeName"
-                                materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}"
-                                Margin="2 2 0 0" Width="360"
-                                HorizontalAlignment="Right">
+                              
+                              Margin="2 2 0 0" Width="180"
+                              SelectedIndex="{Binding Inquiry.InquiryTalkType,Converter={StaticResource TalkTypeToInt},Mode=TwoWay}"
+                              HorizontalAlignment="Right">
 
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Margin="20,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
                     <TextBlock Text="信息备注：" VerticalAlignment="Center" />
                     <TextBox Name="TextBox_Remarks" materialDesign:TransitionAssist.DisableTransitions="True" Visibility="Visible" VerticalAlignment="Center"
-                             Width="540" Margin="2,2,0,0" Padding="2,0,0,0" />
+                             Width="540" Margin="2,2,0,0" Padding="2,0,0,0" 
+                             Text="{Binding Inquiry.InquiryRemarks,Mode=TwoWay}"/>
                 </StackPanel>
             </Grid>
         </GroupBox>
@@ -271,16 +283,24 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button Name="Button_Confim"  Style="{DynamicResource MaterialDesignRaisedButton}" Grid.Column="0" Grid.Row="0"
-                         materialDesign:ShadowAssist.ShadowDepth="Depth2" Width="160" Height="80"
-                         HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,30,0" Background="#0078D7"
+                         materialDesign:ShadowAssist.ShadowDepth="Depth2" Width="120" Height="60"
+                         HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,30,0" Background="#0078D7"
                      Click="Button_Confim_Click"
                          >
                 确认信息
             </Button>
             <Button  Name="Button_ReGet" Style="{DynamicResource MaterialDesignRaisedButton}" Grid.Column="1" Grid.Row="0"
-                         materialDesign:ShadowAssist.ShadowDepth="Depth2" Width="160" Height="80"
-                         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,30,0,0" Background="#0078D7"
+                         materialDesign:ShadowAssist.ShadowDepth="Depth2" Width="120" Height="60"
+                         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,0,0,0" Background="#0078D7"
                      Click="Button_ReGetInfo_Click"
+                         >
+                重新获取
+            </Button>
+
+            <Button  Name="Button_Test" Style="{DynamicResource MaterialDesignRaisedButton}" Grid.Column="1" Grid.Row="0"
+                         materialDesign:ShadowAssist.ShadowDepth="Depth2" Width="120" Height="60" Opacity="0.001"
+                         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,0,0,0" Background="#0078D7"
+                     Click="Button_Test_Click"
                          >
                 重新获取
             </Button>

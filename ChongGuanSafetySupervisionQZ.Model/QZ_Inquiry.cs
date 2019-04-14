@@ -12,7 +12,6 @@ namespace ChongGuanSafetySupervisionQZ.Model
         [StringLength(64)]
         public string InquiryId { get; set; }
 
-        [Required]
         [StringLength(32)]
         public string InquiryCode { get; set; }
 
@@ -20,41 +19,44 @@ namespace ChongGuanSafetySupervisionQZ.Model
         [StringLength(20)]
         public string InquiryDate { get; set; }
 
-        [Required]
-        [StringLength(128)]
+        //[Required]
+        //public DateTime InquiryDate { get; set; }
+
+        [StringLength(256)]
         public string InquiryAddress { get; set; }
 
-        [Required]
-        [StringLength(32)]
+        [StringLength(64)]
         public string EventId { get; set; }
 
         [Required]
-        [StringLength(32)]
+        [StringLength(64)]
         public string PartyId { get; set; }
 
-        [Required]
-        [StringLength(128)]
+        [StringLength(256)]
         public string Users { get; set; }
 
-        [StringLength(128)]
+        [StringLength(256)]
         public string InquiryChatFilePath { get; set; }
 
-        [StringLength(128)]
+        [StringLength(256)]
         public string InquiryAudioFilePath { get; set; }
 
-        [StringLength(128)]
+        [StringLength(256)]
         public string InquiryVideo1FilePath { get; set; }
 
-        [StringLength(128)]
+        [StringLength(256)]
         public string InquiryVideo2FilePath { get; set; }
 
-        [StringLength(128)]
+        [StringLength(256)]
         public string InquiryVideo3FilePath { get; set; }
 
-        [StringLength(128)]
+        [StringLength(256)]
         public string InquiryVideo4FilePath { get; set; }
 
-        [StringLength(128)]
+        [StringLength(256)]
+        public string InquiryPictureFilePath { get; set; }
+
+        [StringLength(256)]
         public string InquiryLawBookFilePath { get; set; }
 
         [StringLength(20)]
@@ -62,6 +64,18 @@ namespace ChongGuanSafetySupervisionQZ.Model
 
         [StringLength(20)]
         public string InquiryEndTime { get; set; }
+
+        [StringLength(20)]
+        public string InquiryPoliceName { get; set; }
+
+        [StringLength(20)]
+        public string InquiryPoliceNumber { get; set; }
+
+        [StringLength(64)]
+        public string InquiryTalkType { get; set; }
+
+        [StringLength(256)]
+        public string InquiryRemarks { get; set; }
 
         [Required]
         [StringLength(32)]

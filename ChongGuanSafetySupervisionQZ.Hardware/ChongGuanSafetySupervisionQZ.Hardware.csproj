@@ -48,15 +48,20 @@
     <Reference Include="AForge.Video.FFMPEG">
       <HintPath>..\lib\AForge.Video.FFMPEG.dll</HintPath>
     </Reference>
-    <Reference Include="hci_asr_csharp">
-      <HintPath>..\lib\hci_asr_csharp.dll</HintPath>
+    <Reference Include="hci_asr_csharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\hcicloud\hci_asr_csharp.dll</HintPath>
     </Reference>
-    <Reference Include="hci_sys_csharp">
-      <HintPath>..\lib\hci_sys_csharp.dll</HintPath>
+    <Reference Include="hci_sys_csharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\hcicloud\hci_sys_csharp.dll</HintPath>
     </Reference>
     <Reference Include="Interop.SpeechLib">
       <HintPath>..\lib\Interop.SpeechLib.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="libzkfpcsharp">
+      <HintPath>..\lib\libzkfpcsharp.dll</HintPath>
     </Reference>
     <Reference Include="NAudio">
       <HintPath>..\lib\NAudio.dll</HintPath>
@@ -77,6 +82,8 @@
     <Compile Include="CardClass.cs" />
     <Compile Include="Data_Chunk.cs" />
     <Compile Include="Fact_Chunk.cs" />
+    <Compile Include="FingerBitmapFormat.cs" />
+    <Compile Include="FingerClass.cs" />
     <Compile Include="Format_Chunk.cs" />
     <Compile Include="FormName.cs" />
     <Compile Include="HwClass.cs" />

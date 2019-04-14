@@ -14,21 +14,27 @@ namespace ChongGuanSafetySupervisionQZ.DAL
         {
             string message = "添加信息失败";
 
-            qZ_Inquiry.InquiryId = Guid.NewGuid().ToString();
+            try
+            {
+                qZ_Inquiry.InquiryId = Guid.NewGuid().ToString();
 
-            qZ_Inquiry.CreateTime = DateTime.Now.ToString();
-            qZ_Inquiry.ModifyTime = DateTime.Now.ToString();
+                qZ_Inquiry.CreateTime = DateTime.Now.ToString();
+                qZ_Inquiry.ModifyTime = DateTime.Now.ToString();
 
-            ModelQZ.DatabaseContext.QZ_Inquiry.Add(qZ_Inquiry);
-            await ModelQZ.DatabaseContext.SaveChangesAsync();
+                ModelQZ.DatabaseContext.QZ_Inquiry.Add(qZ_Inquiry);
+                await ModelQZ.DatabaseContext.SaveChangesAsync();
 
-            message = string.Empty;
+                message = string.Empty;
+            }
+            catch (Exception ex)
+            {
 
+            }
             ResultData<QZ_Inquiry> result = new ResultData<QZ_Inquiry> { IsSuccessed = true, Message = message, Data = qZ_Inquiry };
             return result;
         }
 
-        public ResultData<IEnumerable<QZ_Inquiry>> Qurey(string inquiry = "",string eventId = "",string partyId = "",string createUserId = "", string createDepartmentId = "")
+        public ResultData<IEnumerable<QZ_Inquiry>> Qurey(string inquiry = "", string eventId = "", string partyId = "", string createUserId = "", string createDepartmentId = "")
         {
 
             var query = from e in ModelQZ.DatabaseContext.QZ_Inquiry
@@ -40,6 +46,16 @@ namespace ChongGuanSafetySupervisionQZ.DAL
                         select e;
 
             IEnumerable<QZ_Inquiry> data = query.ToList();
+
+            List<QZ_Inquiry> resultData = new List<QZ_Inquiry>();
+
+            foreach (var d in data)
+            {
+                QZ_Inquiry t = new QZ_Inquiry();
+                ReflectionHelper.CopyProperties<QZ_Inquiry>(d, t, new String[] { });
+                resultData.Add(t);
+            }
+
             ResultData<IEnumerable<QZ_Inquiry>> result = new ResultData<IEnumerable<QZ_Inquiry>> { IsSuccessed = true, Message = "", Data = data };
 
             return result;
@@ -96,6 +112,61 @@ namespace ChongGuanSafetySupervisionQZ.DAL
             }
 
             ResultData<QZ_Inquiry> result = new ResultData<QZ_Inquiry> { IsSuccessed = data != null, Message = message, Data = data };
+
+            return result;
+        }
+
+        public ResultData<IEnumerable<QZ_InquiryAndParty>> QueryByCondition(string partyName = "", string partyNumber = "", string talkingType = "")
+        {
+            var query = from i in ModelQZ.DatabaseContext.QZ_Inquiry
+                        join p in ModelQZ.DatabaseContext.QZ_Party
+                        on i.PartyId equals p.PartyId
+                        where
+                            (string.IsNullOrEmpty(partyName) || p.PartyName.Contains(partyName))
+                        && (string.IsNullOrEmpty(partyNumber) || p.PartyNumber == partyNumber)
+                        && (string.IsNullOrEmpty(talkingType) || i.InquiryTalkType == talkingType)
+                        select new QZ_InquiryAndParty
+                        {
+                            Inquiry = i,
+                            Party = p
+                        };
+
+
+            IEnumerable<QZ_InquiryAndParty> data = query.ToList();
+
+            List<QZ_InquiryAndParty> resultData = new List<QZ_InquiryAndParty>();
+
+            foreach (var d in data)
+            {
+                QZ_InquiryAndParty t = new QZ_InquiryAndParty();
+                ReflectionHelper.CopyProperties<QZ_InquiryAndParty>(d, t, new String[] { });
+                resultData.Add(t);
+            }
+
+            ResultData<IEnumerable<QZ_InquiryAndParty>> result = new ResultData<IEnumerable<QZ_InquiryAndParty>> { IsSuccessed = true, Message = "", Data = data };
+
+            return result;
+        }
+
+        public ResultData<IEnumerable<QZ_Inquiry>> QureyByDate(DateTime startDateTime,DateTime endDataTime)
+        {
+            var query = from i in ModelQZ.DatabaseContext.QZ_Inquiry
+                        //where i.InquiryDate >= startDateTime && (i.InquiryDate) <= endDataTime
+                        orderby i.InquiryDate
+                        select i;
+
+            IEnumerable<QZ_Inquiry> data = query.ToList();
+
+            List<QZ_Inquiry> resultData = new List<QZ_Inquiry>();
+
+            foreach (var d in data)
+            {
+                QZ_Inquiry t = new QZ_Inquiry();
+                ReflectionHelper.CopyProperties<QZ_Inquiry>(d, t, new String[] { });
+                resultData.Add(t);
+            }
+
+            ResultData<IEnumerable<QZ_Inquiry>> result = new ResultData<IEnumerable<QZ_Inquiry>> { IsSuccessed = true, Message = "", Data = data };
 
             return result;
         }

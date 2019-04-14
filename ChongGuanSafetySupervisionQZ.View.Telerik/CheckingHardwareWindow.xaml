@@ -19,13 +19,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
             <RowDefinition Height="2.2*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
-        <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Source="Resources/Images/gh.png" />
-        <TextBlock Text="执法取证一体化系统" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Opacity="1" 
-                       Foreground="WhiteSmoke"  FontSize="40" HorizontalAlignment="Center"/>
+        <Image Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="30" Source="Resources/Images/gh.png" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="1" VerticalAlignment="Center" Margin="0,10,30,0" HorizontalAlignment="Right"
+                       Foreground="WhiteSmoke"  FontSize="40" >
+            <Run Text="北京市公安局监所管理总队" />
+            <LineBreak />
+           <Run Text="   监所一体化管教谈话系统"/>
+        </TextBlock>
         <GroupBox  Header="Card Group Box" Background="#EBF2F9" Margin="1,1,1,0"
                    Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" >
             <GroupBox.HeaderTemplate>
@@ -53,7 +57,7 @@
                              Value="{Binding CheckingProgress}"/>
                 <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="40,0" FontSize="20" Foreground="OrangeRed"  Text="{Binding OutputMessage}"/>
 
-                <ProgressBar Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" Margin="90,-10,90,40" Value="100" Height="6" 
+                <ProgressBar Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" Margin="90,5,90,40" Value="100" Height="6" 
                              materialDesign:TransitionAssist.DisableTransitions="True"
                              Foreground="YellowGreen"/>
                 <StackPanel Grid.Column="0" Grid.Row="2" >

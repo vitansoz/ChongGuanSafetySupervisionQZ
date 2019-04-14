@@ -13,7 +13,7 @@
         FontFamily="微软雅黑"
         FontSize="22.667"
         Title="MainWindow" Height="650" Width="900" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
-    <Grid>
+    <Grid >
         <Grid.Background>
             <ImageBrush ImageSource="Resources/Images/mainbj001.jpg"/>
         </Grid.Background>
@@ -22,15 +22,19 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="2.5*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="2.3*"/>
+            <RowDefinition Height="1.5*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
         <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Source="Resources/Images/gh.png" />
-        <TextBlock Text="执法取证一体化系统" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Opacity="1" 
-                       Foreground="WhiteSmoke"  FontSize="45" HorizontalAlignment="Center"/>
+        <TextBlock  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Opacity="1" 
+                       Foreground="WhiteSmoke"  FontSize="36.667" HorizontalAlignment="Center">
+            <Run Text="北京市公安局监所管理总队" />
+            <LineBreak />
+           <Run Text="   监所一体化管教谈话系统"/>
+        </TextBlock>
 
         <GroupBox  Header="Card Group Box" 
                    Style="{DynamicResource MaterialDesignCardGroupBox}" 
@@ -57,7 +61,7 @@
                     <RowDefinition Height="1.5*"/>
                 </Grid.RowDefinitions>
                 <Image Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="3" Margin="15,5,15,20"
-                       Source="Resources/Images/police.png" Stretch="UniformToFill" />
+                       Source="Resources/Images/gh.png" Stretch="Fill" />
                 <materialDesign:Card Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"
                     materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ShadowAssist.ShadowEdges="Top" Padding="5">
                     账号：
@@ -104,7 +108,7 @@
                     <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" Value="50" IsIndeterminate="True" />
                 </materialDesign:Card>
             </Grid>
-            
+
         </GroupBox>
 
     </Grid>

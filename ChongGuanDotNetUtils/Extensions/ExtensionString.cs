@@ -80,6 +80,5 @@ namespace ChongGuanDotNetUtils.Extensions
                 return resultStream.ToArray();
             }
         }
-
     }
 }

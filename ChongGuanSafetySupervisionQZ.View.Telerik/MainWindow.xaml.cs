@@ -4,6 +4,7 @@ using ChongGuanSafetySupervisionQZ.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,12 @@ namespace ChongGuanSafetySupervisionQZ.View.WPF
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            string title = ConfigurationManager.AppSettings["Title"];
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                this.TextBlock_Title.Text = title;
+            }
+
             ChongGuanSafetySupervisionQZ.DAL.AreasDAL areasDAL = new DAL.AreasDAL();
             var areaList = areasDAL.Query();
 

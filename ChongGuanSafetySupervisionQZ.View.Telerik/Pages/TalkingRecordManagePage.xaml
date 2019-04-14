@@ -1,0 +1,886 @@
+﻿<Page x:Class="ChongGuanSafetySupervisionQZ.View.WPF.Pages.TalkingRecordManagePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:userControls="clr-namespace:ChongGuanSafetySupervisionQZ.View.WPF.UserControls"
+      xmlns:local="clr-namespace:ChongGuanSafetySupervisionQZ.View.WPF.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:Converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+      xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+      xmlns:telerikTabControl="clr-namespace:Telerik.Windows.Controls.TabControl;assembly=Telerik.Windows.Controls.Navigation"
+      xmlns:telerikNavigationPrimitives="clr-namespace:Telerik.Windows.Controls.Primitives;assembly=Telerik.Windows.Controls.Navigation"
+      xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls.Primitives;assembly=Telerik.Windows.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TalkingRecordManagePage">
+
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <telerik:BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+            <telerik:InvertedBooleanToVisibilityConverter x:Key="InvertBoolToVisConverter"/>
+
+            <!--<Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="Black" />
+            </Style>-->
+
+            <Style x:Key="TabItemStyle"
+           TargetType="telerik:RadTabItem"
+           BasedOn="{StaticResource RadTabItemStyle}">
+                <Setter Property="Background" Value="#FFD6D4D4" />
+                <Setter Property="Header" Value="{Binding Header}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="telerik:RadTabItem">
+                            <Grid x:Name="wrapper">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStateGroup">
+                                        <VisualState x:Name="MouseOver">
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0" 
+                                                         Storyboard.TargetName="MouseOverVisual"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)" 
+                                                         To="1" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="Selected">
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0" 
+                                                         Storyboard.TargetName="SelectionVisual"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)" 
+                                                         To="1" />
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderElement"
+                                                                       Storyboard.TargetProperty="(Shape.Stroke)" 
+                                                                       Duration="0">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <SolidColorBrush Color="#FF767676"/>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="SelectedMouseOver">
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0" Storyboard.TargetName="SelectionVisual"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)" 
+                                                         To="1" />
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderElement"
+                                                                       Storyboard.TargetProperty="(Shape.Stroke)" 
+                                                                       Duration="0">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <SolidColorBrush Color="#FF767676"/>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="PlacementStates">
+                                        <VisualState x:Name="VerticalLeft">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OrientationTransform"
+                                                                       Storyboard.TargetProperty="LayoutTransform" 
+                                                                       Duration="0">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <RotateTransform Angle="90" />
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border x:Name="NormalVisual"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}" />
+                                <Border x:Name="MouseOverVisual" 
+                                Opacity="0"
+                                Background="#FFCCCCCC"
+                                BorderBrush="White"
+                                BorderThickness="{TemplateBinding BorderThickness}" />
+                                <Border x:Name="SelectionVisual" 
+                                Opacity="0"
+                                Background="White"
+                                BorderBrush="#FFD6D4D4"
+                                BorderThickness="{TemplateBinding BorderThickness}" />
+                                <telerikPrimitives:LayoutTransformControl x:Name="OrientationTransform">
+                                    <ContentControl x:Name="HeaderElement"
+                                            IsTabStop="False"
+                                            Content="{TemplateBinding Header}" 
+                                            ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                            Foreground="{TemplateBinding HeaderForeground}"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                </telerikPrimitives:LayoutTransformControl>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <ControlTemplate x:Key="TabControlTemplate" 
+                     TargetType="telerik:LayoutControlTabGroup">
+                <Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="ContentBorder" 
+                        Grid.Column="1"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}"
+                        Padding="{TemplateBinding Padding}">
+                            <ContentControl	x:Name="PART_ContentElement" Content="{TemplateBinding SelectedItem}" />
+                        </Border>
+
+                        <telerik:LayoutTransformControl x:Name="HeaderDockedElement" 
+                                                Margin="0 0 -2 0">
+                            <telerik:LayoutTransformControl.LayoutTransform>
+                                <RotateTransform Angle="-90" />
+                            </telerik:LayoutTransformControl.LayoutTransform>
+                            <Grid>
+                                <Border x:Name="HeaderBackground" />
+                                <ItemsPresenter HorizontalAlignment="Right" FlowDirection="RightToLeft"/>
+                            </Grid>
+                        </telerik:LayoutTransformControl>
+                    </Grid>
+                </Grid>
+            </ControlTemplate>
+
+            <Style x:Key="ColumnTextStyle" 
+           TargetType="TextBlock">
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Padding" Value="5 2 0 2" />
+            </Style>
+
+            <Style x:Key="FirstColumnTextStyle" 
+           TargetType="TextBlock" >
+                <Setter Property="Foreground" Value="{telerik:Windows8Resource ResourceKey=AccentBrush}" />
+                <Setter Property="MinWidth" Value="90" />
+                <Setter Property="Padding" Value="5 2 5 2" />
+            </Style>
+
+            <Style x:Key="LabelStyle" 
+           TargetType="TextBlock" >
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="Black" />
+            </Style>
+
+            <Style x:Key="BoldLabelStyle"
+           TargetType="TextBlock" 
+           BasedOn="{StaticResource LabelStyle}">
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="Width" Value="70" />
+            </Style>
+
+            <Style x:Key="GalleryImageStyle"
+           TargetType="Image">
+                <Setter Property="Width" Value="130" />
+                <Setter Property="Height" Value="150" />
+                <Setter Property="Margin" Value="0 0 10 0" />
+            </Style>
+
+            <Style TargetType="telerik:RadComboBox" 
+           BasedOn="{StaticResource RadComboBoxStyle}">
+                <Setter Property="Margin" Value="0,5,0,0" />
+            </Style>
+
+            <Style x:Key="ListBoxItemStyle" 
+           TargetType="telerik:RadListBoxItem"
+           BasedOn="{StaticResource RadListBoxItemStyle}">
+                <Setter Property="Margin" Value="0 0 5 0" />
+                <Setter Property="Padding" Value="8" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Foreground" Value="{telerik:Windows8Resource ResourceKey=AccentBrush}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="telerik:RadListBoxItem">
+                            <Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                        <VisualState x:Name="MouseOver">
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0" 
+                                                         To="1" 
+                                                         Storyboard.TargetProperty="Opacity" 
+                                                         Storyboard.TargetName="MouseOverBorder"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0" 
+                                                         To="0.5" 
+                                                         Storyboard.TargetProperty="Opacity" 
+                                                         Storyboard.TargetName="contentPresenter"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="SelectionStates">
+                                        <VisualState x:Name="Unselected"/>
+                                        <VisualState x:Name="Selected">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Duration="0:0:0" 
+                                                                       Storyboard.TargetName="SelectedBorder" 
+                                                                       Storyboard.TargetProperty="Visibility">
+                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Visible</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Duration="0:0:0" 
+                                                                       Storyboard.TargetName="contentPresenter" 
+                                                                       Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <SolidColorBrush>White</SolidColorBrush>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="FocusStates">
+                                        <VisualState x:Name="Focused">
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0" 
+                                                         To="0.2" 
+                                                         Storyboard.TargetProperty="Opacity" 
+                                                         Storyboard.TargetName="FocusVisual"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unfocused"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True"/>
+                                <Border x:Name="MouseOverBorder"
+                                Opacity="0" 
+                                BorderBrush="{telerik:Windows8Resource ResourceKey=AccentBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"/>
+                                <Border x:Name="SelectedBorder"
+                                Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" 
+                                Visibility="Collapsed" 
+                                SnapsToDevicePixels="True"/>
+                                <ContentControl x:Name="contentPresenter"
+                                        Margin="{TemplateBinding Padding}"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        IsTabStop="False"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                                        Content="{TemplateBinding Content}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                        ContentStringFormat="{TemplateBinding ContentStringFormat}"/>
+                                <Border x:Name="FocusVisual" 
+                                Opacity="0" 
+                                BorderThickness="1" 
+                                BorderBrush="{telerik:Windows8Resource ResourceKey=MarkerBrush}" 
+                                SnapsToDevicePixels="True"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <DataTemplate x:Key="RunningListItemTemplate">
+                <Border>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Date}"
+                           Grid.Row="0"
+                           Grid.ColumnSpan="2"
+                           Margin="0 3 0 15"
+                           FontSize="12"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center" />
+                        <TextBlock Text="DISTANCE"
+                           Grid.Row="1"
+                           Grid.ColumnSpan="2"
+                           HorizontalAlignment="Center" />
+                        <TextBlock Text="{Binding Distance}"
+                           Grid.Row="2"
+                           Grid.ColumnSpan="2"
+                           HorizontalAlignment="Center" />
+                        <TextBlock Text="Miles"
+                           Grid.Row="3"
+                           Grid.ColumnSpan="2"
+                           HorizontalAlignment="Center" />
+                        <TextBlock Text="Time:"
+                           Grid.Row="4" 
+                           Grid.Column="0"
+                           Margin="0 0 8 0" />
+                        <TextBlock Text="{Binding Time}"
+                           Grid.Row="4" 
+                           Grid.Column="1"
+                           Margin="0 0 8 0"
+                           x:Name="TextItem1" />
+                        <TextBlock Text="Calories:"
+                           Grid.Row="5" 
+                           Grid.Column="0"
+                           Margin="0 0 8 0" />
+                        <TextBlock Text="{Binding Calories}"
+                           Grid.Row="5" 
+                           Grid.Column="1"
+                           x:Name="TextItem2" />
+                        <TextBlock Text="Pace:"
+                           Grid.Row="6" 
+                           Grid.Column="0"
+                           Margin="0 0 8 0" />
+                        <TextBlock Text="{Binding Pace}"
+                           Grid.Row="6" 
+                           Grid.Column="1"
+                           Margin="0 0 8 0"
+                           x:Name="TextItem3" />
+                        <TextBlock Text="Walking:"
+                           Grid.Row="7" 
+                           Grid.Column="0"
+                           Margin="0 0 8 0" />
+                        <TextBlock Text="{Binding Walking}"
+                           Grid.Row="7" 
+                           Grid.Column="1"
+                           x:Name="TextItem4" />
+                    </Grid>
+                </Border>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type telerik:RadListBoxItem}}}" 
+                         Value="False">
+                        <Setter TargetName="TextItem1" Property="Foreground" Value="Black" />
+                        <Setter TargetName="TextItem2" Property="Foreground" Value="Black" />
+                        <Setter TargetName="TextItem3" Property="Foreground" Value="Black" />
+                        <Setter TargetName="TextItem4" Property="Foreground" Value="Black" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+
+            <Style TargetType="Image" x:Key="TabImageStyle">
+                <Setter Property="Width" Value="60" />
+                <Setter Property="Height" Value="60" />
+                <Setter Property="RenderTransformOrigin" Value="0.5 0.5" />
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <RotateTransform Angle="90" CenterX="0.5" CenterY="0.5" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <telerik:RadLayoutControl x:Name="LayoutControl" SelectionChanged="LayoutControl_SelectionChanged"
+                                  BorderBrush="Transparent" 
+                                  IsInEditMode="False"
+                                  Margin="5" SelectedItem="{x:Null}" >
+            <telerik:LayoutControlTabGroup Template="{StaticResource TabControlTemplate}" x:Name="RootLayoutTabGroup" >
+                <telerik:LayoutControlTabGroupItem MouseLeftButtonDown="LayoutControlTabGroupItem_MouseLeftButtonDown" IsSelected="False">
+                    <telerik:LayoutControlTabGroupItem.Header>
+                        <Grid Margin="0,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"  Text="全部记录" FontFamily="Microsoft YaHei UI" FontSize="16" Margin="-25,0,-15,-0" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="90"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <Image Grid.Column="1" Source="/ChongGuanSafetySupervisionQZ.View.WPF;component/Resources/Images/allrecords.png" 
+                               Style="{StaticResource TabImageStyle}" />
+                        </Grid>
+                    </telerik:LayoutControlTabGroupItem.Header>
+                    <telerik:LayoutControlGroup Orientation="Vertical" BorderBrush="Transparent"  >
+                        <GroupBox Header="全部记录" Margin="2" Grid.Row="1"  FontFamily="Microsoft YaHei UI"  FontSize="16.668" Name="GroupBox_PartyInfo">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <ListBox  Name="ListBox_TalkingRecords" SelectionChanged="ListBox_TalkingRecords_SelectionChanged" ItemsSource="{Binding CurrentInquiryAndPartyList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Height" Value="220" />
+                                            <Setter Property="Width" Value="{Binding ItemWidth}" />
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="4" Rows="2" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalAlignment="Stretch">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0" Grid.ColumnSpan="2"  Source="{Binding InquiryPictureFilePath}" Stretch="Fill"/>
+                                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding PartyName}" />
+                                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding InquiryDate}" HorizontalAlignment="Right"/>
+                                                <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding InquiryTalkType}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Grid Name="Grid_PageControl" Grid.Row="1" Margin="0,30,0,10">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text=""  Margin="0,0,10,0">
+                                            <Hyperlink Name="Hyperlink_PrePage" Click="Hyperlink_PrePage_Click" >
+                                                上一页
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Text="" Margin="0,0,10,0">
+                                            <Hyperlink Name="Hyperlink_NextPage" Click="Hyperlink_NextPage_Click" >
+                                                下一页
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Name="TextBlock_RecordStatus">
+                                            <Run Text="{Binding RecordCount}" />
+                                            <Run Text="条记录，" />
+                                            <Run Text="共" />
+                                            <Run Text="{Binding PageCount}" />
+                                            <Run Text="页，" />
+                                            <Run Text="当前为" />
+                                            <Run Text="{Binding CurrentPageNumber}" />
+                                            <Run Text="页" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </GroupBox>
+                    </telerik:LayoutControlGroup>
+                </telerik:LayoutControlTabGroupItem>
+                <telerik:LayoutControlTabGroupItem IsSelected="False">
+                    <telerik:LayoutControlTabGroupItem.Header>
+                        <Grid Margin="0,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"  Text="查询检索" FontFamily="Microsoft YaHei UI" FontSize="16" Margin="-25,0,-15,-0" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="90"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <Image Grid.Column="1" Source="/ChongGuanSafetySupervisionQZ.View.WPF;component/Resources/Images/search.png" 
+                               Style="{StaticResource TabImageStyle}" />
+                        </Grid>
+                    </telerik:LayoutControlTabGroupItem.Header>
+
+                    <telerik:LayoutControlGroup Orientation="Vertical" BorderBrush="Transparent"  >
+                        <GroupBox Header="查询条件" Margin="2" Grid.Row="1"  FontFamily="Microsoft YaHei UI"  FontSize="16.668" Name="GroupBox_PartyInfoBySearch">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <StackPanel Margin="0,0,0,0" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                        <TextBlock Text="在押人员姓名：" VerticalAlignment="Center" />
+                                        <TextBox Name="TextBox_PartyNameForSearch" materialDesign:TransitionAssist.DisableTransitions="True" Visibility="Visible" VerticalAlignment="Center" Width="280" Margin="2,2,0,0" Padding="2,0,0,0" 
+                                 Text="{Binding PartyNameForSearch,Mode=TwoWay}"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,0,0" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                        <TextBlock Text="在押人员编号：" VerticalAlignment="Center" />
+                                        <TextBox Name="TextBox_PartyNumber" materialDesign:TransitionAssist.DisableTransitions="True" Visibility="Visible" VerticalAlignment="Center" Width="280" Margin="2,2,0,0" Padding="2,0,0,0" 
+                                 Text="{Binding PartyNumberForSearch,Mode=TwoWay}"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1">
+                                        <TextBlock Text="谈话类型：      " VerticalAlignment="Center" />
+                                        <ComboBox Name="ComboBox_TalkTpye" DisplayMemberPath="TalkTypeName"
+                                                  Margin="2 2 0 0" Width="280"
+                                                  SelectedIndex="{Binding InquiryTalkTypeForSearch,Converter={StaticResource TalkTypeToIntForSearch},Mode=TwoWay}"
+                                                  HorizontalAlignment="Right">
+                                        </ComboBox>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Margin="0,0,0,80">
+                                    <Button Name="Button_Confim"  Style="{DynamicResource MaterialDesignRaisedButton}" Grid.Column="0" Grid.Row="1"
+                                           materialDesign:ShadowAssist.ShadowDepth="Depth2" Width="120" Height="60"
+                                         HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,30,0" Background="#0078D7"
+                                      Click="Button_Confim_Click"
+                          >
+                                        查询
+                                    </Button>
+                                    <Button  Name="Button_ReGet" Style="{DynamicResource MaterialDesignRaisedButton}" Grid.Column="1" Grid.Row="1"
+                         materialDesign:ShadowAssist.ShadowDepth="Depth2" Width="120" Height="60"
+                         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,0,0,0" Background="#0078D7"
+                     Click="Button_ReGetInfo_Click"
+                         >
+                                        置空
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                    </telerik:LayoutControlGroup>
+                </telerik:LayoutControlTabGroupItem>
+                <telerik:LayoutControlTabGroupItem>
+                    <telerik:LayoutControlTabGroupItem.Header>
+                        <Grid Margin="0,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"  Text="查询结果" FontFamily="Microsoft YaHei UI" FontSize="16" Margin="-25,0,-15,-0" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="90"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <Image Grid.Column="1" Source="/ChongGuanSafetySupervisionQZ.View.WPF;component/Resources/Images/searchresult.png" 
+                               Style="{StaticResource TabImageStyle}" />
+                        </Grid>
+                    </telerik:LayoutControlTabGroupItem.Header>
+                    <telerik:LayoutControlGroup Orientation="Vertical" BorderBrush="Transparent"  >
+                        <GroupBox Header="查询结果" Margin="2" Grid.Row="1"  FontFamily="Microsoft YaHei UI"  FontSize="16.668" Name="GroupBox_Search">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <ListBox  Name="ListBox_TalkingRecordsBySearch" SelectionChanged="ListBox_TalkingRecordsBySearch_SelectionChanged" ItemsSource="{Binding CurrentInquiryAndPartyListBySearch}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Height" Value="220" />
+                                            <Setter Property="Width" Value="{Binding ItemWidth}" />
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="4" Rows="2" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalAlignment="Stretch">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0" Grid.ColumnSpan="2"  Source="{Binding InquiryPictureFilePath}" Stretch="Fill"/>
+                                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding PartyName}" />
+                                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding InquiryDate}" HorizontalAlignment="Right"/>
+                                                <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding InquiryTalkType}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Grid Name="Grid_PageControlBySeacrh" Grid.Row="1" Margin="0,30,0,10">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text=""  Margin="0,0,10,0">
+                                            <Hyperlink Name="Hyperlink_PrePageBySeacrh" Click="Hyperlink_PrePageBySeacrh_Click" >
+                                                上一页
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Text="" Margin="0,0,10,0">
+                                            <Hyperlink Name="Hyperlink_NextPageBySeacrh" Click="Hyperlink_NextPageBySeacrh_Click" >
+                                                下一页
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Name="TextBlock_RecordStatusBySeacrh">
+                                            <Run Text="{Binding RecordCountBySearch}" />
+                                            <Run Text="条记录，" />
+                                            <Run Text="共" />
+                                            <Run Text="{Binding PageCountBySearch}" />
+                                            <Run Text="页，" />
+                                            <Run Text="当前为" />
+                                            <Run Text="{Binding CurrentPageNumberBySearch}" />
+                                            <Run Text="页" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </GroupBox>
+                    </telerik:LayoutControlGroup>
+                </telerik:LayoutControlTabGroupItem>
+                <telerik:LayoutControlTabGroupItem IsSelected="False">
+                    <telerik:LayoutControlTabGroupItem.Header>
+                        <Grid Margin="0,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"  Text="记录回看" FontFamily="Microsoft YaHei UI" FontSize="16" Margin="-25,0,-15,-0" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="90"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <Image Grid.Column="1" Source="/ChongGuanSafetySupervisionQZ.View.WPF;component/Resources/Images/video.png" 
+                               Style="{StaticResource TabImageStyle}" />
+                        </Grid>
+                    </telerik:LayoutControlTabGroupItem.Header>
+
+                    <telerik:LayoutControlGroup Orientation="Vertical" BorderBrush="Transparent"  >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+
+                            <GroupBox Header="谈话信息" Margin="2" Grid.Row="0" Grid.ColumnSpan="2" FontFamily="Microsoft YaHei UI" Background="#CCF5FF" FontSize="16.668" Name="GroupBox_TalkingInfo">
+                                <Grid>
+                                    <StackPanel>
+                                        <Expander>
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock FontSize="18.667">
+                                                        <Run Text="在押人员：" />
+                                                        <Run Text="{Binding CurrentInquiryAndParty.PartyName}" />
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <Grid Margin="24,12">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,10">
+                                                    <Run Text="姓名：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.PartyName}" />
+                                                </TextBlock>
+                                                <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,10">
+                                                    <Run Text="性别：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.PartySex}" />
+                                                </TextBlock>
+                                                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,10">
+                                                    <Run Text="民族：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.PartyNational}" />
+                                                </TextBlock>
+                                                <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,10">
+                                                    <Run Text="生日：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.PartyBirth}" />
+                                                </TextBlock>
+
+                                                <Image Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="3" Margin="5,0,0,0" Height="120" Width="225" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/ChongGuanSafetySupervisionQZ.View.WPF;component/Resources/Images/sfz_zm.png" />
+                                                <Image Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="3" Margin="10,0,0,0" Height="120" Width="230" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                                        Source="{Binding CurrentInquiryAndParty.PartyCardImageFilePath}" />
+
+                                                <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,10">
+                                                    <Run Text="身份证号：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.PartyCard}" />
+                                                </TextBlock>
+                                                <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,10">
+                                                    <Run Text="家庭住址：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.PartyAddress}" />
+                                                </TextBlock>
+
+                                                <TextBlock Grid.Row="4" Grid.Column="0" Margin="0,10">
+                                                    <Run Text="在押编号：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.PartyNumber}" />
+                                                </TextBlock>
+                                                <TextBlock Grid.Row="4" Grid.Column="1" Margin="0,10">
+                                                    <Run Text="羁押日期：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.PartyDetentionDate}" />
+                                                </TextBlock>
+                                                <TextBlock Grid.Row="4" Grid.Column="2" Margin="0,10">
+                                                    <Run Text="所在监所：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.PartyPrison}" />
+                                                </TextBlock>
+                                                <TextBlock Grid.Row="4" Grid.Column="3" Margin="0,10">
+                                                    <Run Text="所在监区：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.PartyMonitoringArea}" />
+                                                </TextBlock>
+                                                <TextBlock Grid.Row="5" Grid.Column="0" Margin="0,10">
+                                                    <Run Text="所在监室：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.PartyMonitoringRoom}" />
+                                                </TextBlock>
+                                                <TextBlock Grid.Row="5" Grid.Column="1" Margin="0,10">
+                                                    <Run Text="羁押原因：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.PartyDetentionReason}" />
+                                                </TextBlock>
+
+                                                <TextBlock Grid.Row="6" Grid.Column="0" Margin="0,10">
+                                                    <Run Text="管教民警：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.InquiryPoliceName}" />
+                                                </TextBlock>
+
+                                                <TextBlock Grid.Row="6" Grid.Column="1" Margin="0,10">
+                                                    <Run Text="民警警号：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.InquiryPoliceNumber}" />
+                                                </TextBlock>
+                                                <TextBlock Grid.Row="6" Grid.Column="2" Margin="0,10">
+                                                    <Run Text="谈话时间：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.InquiryDate}" />
+                                                </TextBlock>
+
+                                                <TextBlock Grid.Row="6" Grid.Column="3" Margin="0,10">
+                                                    <Run Text="谈话地点：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.InquiryAddress}" />
+                                                </TextBlock>
+                                                <TextBlock Grid.Row="7" Grid.Column="0" Margin="0,10">
+                                                    <Run Text="谈话类型：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.InquiryTalkType}" />
+                                                </TextBlock>
+
+                                                <TextBlock Grid.Row="7" Grid.Column="1" Margin="0,10">
+                                                    <Run Text="信息备注：" />
+                                                    <Run Text="{Binding CurrentInquiryAndParty.InquiryRemarks}" />
+                                                </TextBlock>
+                                            </Grid>
+                                        </Expander>
+                                    </StackPanel>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Header="视频回放" Margin="2" Grid.Row="1" Grid.Column="0"  FontFamily="Microsoft YaHei UI" Background="#CCF5FF"
+                                      FontSize="16.668" Name="GroupBox_Video">
+                                <Grid >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="3*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <MediaElement Height="400"  Name="MediaElement_Video" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                                                  LoadedBehavior="Manual" UnloadedBehavior="Manual" 
+                                                  
+                                                  Source="{Binding CurrentInquiryAndParty.InquiryVideo1FilePath}" MediaEnded="MediaElement_Video_MediaEnded" />
+                                    <Image Name="Image_Mask" Height="400" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                                           Source="{Binding CurrentInquiryAndParty.InquiryPictureFilePath}" />
+                                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="5" Orientation="Horizontal">
+                                        <Button Name="Button_PlayVideo"  Margin="0,0,10,0"
+                                            Content="播放" Width="80" HorizontalAlignment="Left"
+                                                Click="Button_PlayVideo_Click"/>
+
+                                        <Button Name="Button_PauseVideo"  Margin="10,0,10,0"
+                                            Content="暂停" Width="80" HorizontalAlignment="Left"
+                                                Click="Button_PauseVideo_Click"/>
+
+                                        <Button Name="Button_StopVideo"  Margin="10,0,10,0"
+                                            Content="停止" Width="80" HorizontalAlignment="Left"
+                                                Click="Button_StopVideo_Click"/>
+                                    </StackPanel>
+                                </Grid>
+                            </GroupBox>
+
+                            <GroupBox Header="谈话记录" Margin="2" Grid.Row="1" Grid.Column="1"  FontFamily="Microsoft YaHei UI" Background="#CCF5FF"
+                                      FontSize="16.668" Name="GroupBox_Record">
+                                <Grid >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ListBox Name="ListBox_MessageList" ItemsSource="{Binding MessageList}" Background="#FAFAFA"              
+                                             Height="400" VerticalAlignment="Top"
+                                            materialDesign:RippleAssist.IsDisabled="True">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <userControls:TalkingMessageControl
+                                                    Height="Auto"
+                                                    MessageTime="{Binding MessageTime}"
+                                                    MessageContent="{Binding MessageContent}"
+                                                    MessageTypeIsParty="{Binding MessageTypeIsParty}"/>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                    <Button Grid.Row="1" Grid.Column="0" Margin="0,20,0,0" HorizontalAlignment="Right" Content="查看文书"  Height="40" Width="160"
+                                            Name="Button_OpenLawBook" Click="Button_OpenLawBook_Click"/>
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                    </telerik:LayoutControlGroup>
+                </telerik:LayoutControlTabGroupItem>
+            </telerik:LayoutControlTabGroup>
+        </telerik:RadLayoutControl>
+    </Grid>
+</Page>
